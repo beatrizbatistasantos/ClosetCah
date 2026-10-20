@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Produtos | Closet da Cah</title>
+<link rel="stylesheet" href="style.css">
+<script src="script.js" defer></script>
+</head>
+<body>
+<header class="cabecalho">
+<a class="logo" href="index.html">Closet <span>da Cah</span></a>
+<nav>
+<a href="index.html">Início</a>
+<a href="produtos.html">Produtos</a>
+<a href="favoritos.html">Favoritos</a>
+<a href="carrinho.html">Carrinho <span id="total-carrinho">0</span></a>
+<a href="contato.html">Contato</a>
+</nav>
+</header>
+<main class="secao">
+<h1>Nossa vitrine</h1>
+<p class="descricao">Encontre uma peça para chamar de sua.</p>
+<input id="pesquisa" class="campo" type="search"
+     placeholder="Pesquisar produto..." aria-label="Pesquisar produto">
+<div class="filtros">
+<button class="filtro ativo" data-categoria="Todos">Todos</button>
+<button class="filtro" data-categoria="Vestidos">Vestidos</button>
+<button class="filtro" data-categoria="Conjuntos">Conjuntos</button>
+<button class="filtro" data-categoria="Blusas">Blusas</button>
+<button class="filtro" data-categoria="Acessórios">Acessórios</button>
+</div>
+<div id="lista-produtos" class="grade-produtos"></div>
+<p id="mensagem-vazia" class="centralizado" hidden>
+     Nenhum produto encontrado.
+</p>
+</main>
+<footer>
+<p>© 2026 Closet da Cah — Moda feminina</p>
+</footer>
+</body>
+</html>
