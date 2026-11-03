@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Perfil | Closet</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Mensagem para computadores -->
+    <aside class="desktop-message">
+        <div>
+            <h1>Closet</h1>
+
+            <p>
+                Esta interface foi criada para a versão mobile.
+                Reduza a largura da janela ou abra o site em um
+                celular para visualizar as telas do aplicativo.
+            </p>
+        </div>
+    </aside>
+
+    <!-- Aplicativo mobile -->
+    <main class="mobile-app">
+
+        <div class="phone-content">
+
+            <!-- Cabeçalho -->
+            <header class="topbar">
+                <span class="spacer"></span>
+
+                <button class="icon-button" aria-label="Sacola">
+                    <img src="images/bag.png">
+                </button>
+
+                <button class="icon-button" aria-label="Notificações">
+                    <img src="images/bell.png">
+                </button>
+            </header>
+
+            <!-- Título do perfil -->
+            <h1 class="page-title">Meu Perfil</h1>
+
+            <!-- Conteúdo do perfil -->
+            <section
+                class="profile-content"
+                style="text-align: center; margin: 70px 20px; color: #777;"
+            >
+
+                <div style="font-size: 56px;" aria-hidden="true">
+                    ☉
+                </div>
+
+                <p>Área de perfil em construção.</p>
+
+            </section>
+
+            <!-- Navegação inferior -->
+            <nav class="bottom-nav" aria-label="Navegação principal">
+
+                <a class="active" href="index.html">
+                    <img src="images/home.png">
+                    <small>HOME</small>
+                </a>
+
+                <a href="favoritos.html">
+                    <span class="nav-icon">♡</span>
+                    <small>FAVORITOS</small>
+                </a>
+
+                <a href="pedidos.html">
+                    <img src="images/package.png">
+                    <small>PEDIDOS</small>
+                </a>
+
+                <a href="perfil.html">
+                    <img src="images/user.png">
+                    <small>PERFIL</small>
+                </a>
+
+            </nav>
+
+            <!-- Botão flutuante -->
+            <button
+                class="add-button"
+                aria-label="Adicionar aos favoritos"
+                onclick="window.location.href='favoritos.html'"
+            >
+                +
+            </button>
+
+        </div>
+
+    </main>
+
+</body>
+</html>

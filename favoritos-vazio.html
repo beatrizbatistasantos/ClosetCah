@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Closet vazio | Closet</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Mensagem para computadores -->
+    <aside class="desktop-message">
+        <div>
+            <h1>Closet</h1>
+
+            <p>
+                Esta interface foi criada para a versão mobile.
+                Reduza a largura da janela ou abra o site em um
+                celular para visualizar as telas do aplicativo.
+            </p>
+        </div>
+    </aside>
+
+    <!-- Aplicativo mobile -->
+    <main class="mobile-app">
+
+        <div class="phone-content">
+
+            <!-- Cabeçalho -->
+            <header class="topbar">
+                <span class="spacer"></span>
+
+                <button class="icon-button" aria-label="Sacola">
+                    <img src="images/bag.png">
+                </button>
+
+                <button class="icon-button" aria-label="Notificações">
+                    <img src="images/bell.png">
+                </button>
+            </header>
+
+            <!-- Estado de closet vazio -->
+            <section class="empty-state">
+
+                <svg
+                    class="box-drawing"
+                    viewBox="0 0 150 135"
+                    role="img"
+                    aria-label="Caixa vazia"
+                >
+                    <g
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="3.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path d="M29 42 75 17 121 42 75 68Z"/>
+                        <path d="M29 42 29 82 75 108 75 68"/>
+                        <path d="M121 42 121 82 75 108"/>
+                        <path d="M29 42 9 26 55 2"/>
+                        <path d="M121 42 141 26 94 2"/>
+                        <path d="M9 26 56 52 75 68 95 52 141 26"/>
+                        <path d="M9 26 56 2 75 17 94 2"/>
+                    </g>
+                </svg>
+
+                <p>Closet Vazio.</p>
+
+                <p style="font-size: 12px;">
+                    <a
+                        href="favoritos.html"
+                        style="color: #777;"
+                    >
+                        Voltar aos favoritos
+                    </a>
+                </p>
+
+            </section>
+
+            <!-- Navegação inferior -->
+           <nav class="bottom-nav" aria-label="Navegação principal">
+
+                <a class="active" href="index.html">
+                    <img src="images/home.png">
+                    <small>HOME</small>
+                </a>
+
+                <a href="favoritos.html">
+                    <span class="nav-icon">♡</span>
+                    <small>FAVORITOS</small>
+                </a>
+
+                <a href="pedidos.html">
+                    <img src="images/package.png">
+                    <small>PEDIDOS</small>
+                </a>
+
+                <a href="perfil.html">
+                    <img src="images/user.png">
+                    <small>PERFIL</small>
+                </a>
+
+            </nav>
+
+            <!-- Botão flutuante -->
+            <button
+                class="add-button"
+                aria-label="Adicionar aos favoritos"
+                onclick="window.location.href='favoritos.html'"
+            >
+                +
+            </button>
+
+        </div>
+
+    </main>
+
+</body>
+</html>

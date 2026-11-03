@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sem pedidos | Closet</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Mensagem para computadores -->
+    <aside class="desktop-message">
+        <div>
+            <h1>Closet</h1>
+            <p>
+                Esta interface foi criada para a versão mobile.
+                Reduza a largura da janela ou abra o site em um
+                celular para visualizar as telas do aplicativo.
+            </p>
+        </div>
+    </aside>
+
+    <!-- Aplicativo mobile -->
+    <main class="mobile-app">
+
+        <div class="phone-content">
+
+            <!-- Cabeçalho -->
+            <header class="topbar">
+                <span class="spacer"></span>
+
+                <button class="icon-button" aria-label="Sacola">
+                    <img src="images/bag.png">
+                </button>
+
+                <button class="icon-button" aria-label="Notificações">
+                    <img src="images/bell.png">
+                </button>
+            </header>
+
+            <!-- Estado sem pedidos -->
+            <section class="empty-state no-orders">
+
+                <svg
+                    class="order-drawing"
+                    viewBox="0 0 160 135"
+                    role="img"
+                    aria-label="Caixa sem pedidos"
+                >
+                    <g
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="3.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path d="M25 43 75 22 125 43 125 76"/>
+                        <path d="M25 43 25 98 73 117 73 62"/>
+                        <path d="M73 62 125 43"/>
+                        <path d="M42 38 42 59 65 69"/>
+                        <path d="M42 38 87 19"/>
+                        <path d="M58 45 58 65"/>
+                        <path d="M58 45 103 26"/>
+                        <path d="M74 52 74 72"/>
+                        <path d="M74 52 119 33"/>
+
+                        <circle
+                            cx="116"
+                            cy="99"
+                            r="25"
+                            fill="white"
+                        />
+
+                        <path d="m106 89 20 20m0-20-20 20"/>
+                    </g>
+                </svg>
+
+                <p>Sem Pedidos.</p>
+
+                <p style="font-size: 12px;">
+                    <a
+                        href="pedidos.html"
+                        style="color: #777;"
+                    >
+                        Ver pedidos recentes
+                    </a>
+                </p>
+
+            </section>
+
+            <nav class="bottom-nav" aria-label="Navegação principal">
+
+                <a class="active" href="index.html">
+                    <img src="images/home.png">
+                    <small>HOME</small>
+                </a>
+
+                <a href="favoritos.html">
+                    <span class="nav-icon">♡</span>
+                    <small>FAVORITOS</small>
+                </a>
+
+                <a href="pedidos.html">
+                    <img src="images/package.png">
+                    <small>PEDIDOS</small>
+                </a>
+
+                <a href="perfil.html">
+                    <img src="images/user.png">
+                    <small>PERFIL</small>
+                </a>
+
+            </nav>
+
+            <!-- Botão de adicionar -->
+            <button
+                class="add-button"
+                aria-label="Adicionar aos favoritos"
+                onclick="window.location.href='favoritos.html'"
+            >
+                +
+            </button>
+
+        </div>
+
+    </main>
+
+</body>
+</html>

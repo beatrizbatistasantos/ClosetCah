@@ -1,34 +1,115 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Meus favoritos | Closet da Cah</title>
-<link rel="stylesheet" href="style.css">
-<script src="script.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Favoritos | Closet</title>
+
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-<header class="cabecalho">
-<a class="logo" href="index.html">Closet <span>da Cah</span></a>
-<nav>
-<a href="index.html">Início</a>
-<a href="produtos.html">Produtos</a>
-<a href="favoritos.html">Favoritos</a>
-<a href="carrinho.html">Carrinho <span id="total-carrinho">0</span></a>
-<a href="contato.html">Contato</a>
-</nav>
-</header>
-<main class="secao">
-<h1>Meus favoritos ♡</h1>
-<p class="descricao">Suas peças preferidas em um só lugar.</p>
-<div id="lista-favoritos" class="grade-produtos"></div>
-<p id="favoritos-vazios" class="centralizado" hidden>
-     Você ainda não salvou nenhum produto.
-<a href="produtos.html">Explorar a vitrine</a>
-</p>
-</main>
-<footer>
-<p>© 2026 Closet da Cah — Moda feminina</p>
-</footer>
+
+    <!-- Mensagem para computadores -->
+    <aside class="desktop-message">
+        <div>
+            <h1>Closet</h1>
+            <p>
+                Esta interface foi criada para a versão mobile.
+                Reduza a largura da janela ou abra o site em um
+                celular para visualizar as telas do aplicativo.
+            </p>
+        </div>
+    </aside>
+
+    <!-- Aplicativo mobile -->
+    <main class="mobile-app">
+
+        <div class="phone-content">
+
+            <!-- Cabeçalho -->
+            <header class="topbar">
+                <span class="spacer"></span>
+
+                <button class="icon-button" aria-label="Sacola">
+                    <img src="images/bag.png">
+                </button>
+
+                <button class="icon-button" aria-label="Notificações">
+                    <img src="images/bell.png">
+                </button>
+            </header>
+
+            <!-- Título da página -->
+            <h1 class="page-title">Seus Favoritos!</h1>
+
+            <div class="title-line"></div>
+
+            <!-- Adicionar favorito -->
+            <a
+                class="add-favorite"
+                href="favoritos-vazio.html"
+                style="color: inherit; text-decoration: none;"
+            >
+                <span>＋</span>
+                Adicionar
+            </a>
+
+            <!-- Lista de favoritos -->
+            <section class="item-list" aria-label="Lista de favoritos">
+
+                <div class="placeholder"></div>
+
+                <div class="placeholder"></div>
+
+                <div class="placeholder"></div>
+
+                <div class="placeholder"></div>
+
+                <div class="placeholder"></div>
+
+            </section>
+
+            <!-- Navegação inferior -->
+            <nav class="bottom-nav" aria-label="Navegação principal">
+
+                <a class="active" href="index.html">
+                    <img src="images/home.png">
+                    <small>HOME</small>
+                </a>
+
+                <a href="favoritos.html">
+                    <span class="nav-icon">♡</span>
+                    <small>FAVORITOS</small>
+                </a>
+
+                <a href="pedidos.html">
+                    <img src="images/package.png">
+                    <small>PEDIDOS</small>
+                </a>
+
+                <a href="perfil.html">
+                    <img src="images/user.png">
+                    <small>PERFIL</small>
+                </a>
+
+            </nav>
+
+            <!-- Botão flutuante -->
+            <button
+                class="add-button"
+                aria-label="Adicionar aos favoritos"
+                onclick="window.location.href='favoritos.html'"
+            >
+                +
+            </button>
+
+        </div>
+
+    </main>
+
 </body>
 </html>
