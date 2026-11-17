@@ -1,0 +1,462 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CLOSET da Cah - Cadastro</title>
+
+<style>
+:root {
+  --pink: #ed777b;
+  --pink-dark: #d95f65;
+  --pink-light: #fff1f1;
+  --text: #242424;
+  --muted: #777;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f7eeee;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text);
+}
+
+button, input {
+  font: inherit;
+}
+
+.mobile {
+  width: 100%;
+  max-width: 900px;
+  height: 100dvh;
+  min-height: 650px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 0 35px #00000012;
+}
+
+.header {
+  height: 75px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 22px;
+  border-bottom: 1px solid #f5eeee;
+}
+
+.header button {
+  width: 42px;
+  height: 42px;
+  border: none;
+  background: var(--pink-light);
+  color: var(--pink-dark);
+  border-radius: 14px;
+  cursor: pointer;
+  font-size: 23px;
+}
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 25px 22px 110px;
+  scrollbar-width: none;
+}
+
+.content::-webkit-scrollbar {
+  display: none;
+}
+
+.container {
+  width: 100%;
+  max-width: 390px;
+  margin: auto;
+}
+
+.brand {
+  width: 105px;
+  height: 105px;
+  margin: 0 auto 15px;
+  border-radius: 50%;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  box-shadow: 0 8px 20px #00000018;
+}
+
+.brand img {
+  width: 82%;
+  height: 82%;
+  object-fit: contain;
+}
+
+h1 {
+  font-size: 27px;
+  text-align: center;
+  margin-bottom: 9px;
+}
+
+.description {
+  font-size: 13px;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.highlight {
+  color: var(--pink-dark);
+  font-weight: 600;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.form-group input {
+  width: 100%;
+  height: 47px;
+  padding: 0 15px;
+  border: 1px solid #e9e3e3;
+  border-radius: 13px;
+  background: #faf8f8;
+  outline: none;
+  font-size: 14px;
+  transition: .25s;
+}
+
+.form-group input:focus {
+  background: white;
+  border-color: var(--pink);
+  box-shadow: 0 0 0 3px #ed777b20;
+}
+
+.form-group input::placeholder {
+  color: #aaa;
+}
+
+.register {
+  width: 100%;
+  height: 49px;
+  border: none;
+  border-radius: 13px;
+  background: linear-gradient(135deg, var(--pink), var(--pink-dark));
+  box-shadow: 0 5px 13px #ed777b40;
+  font-size: 14px;
+  font-weight: 700;
+  color: white;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: .25s;
+}
+
+.register:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px #ed777b55;
+}
+
+.message {
+  display: none;
+  text-align: center;
+  font-size: 13px;
+  padding: 11px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.message.error {
+  display: block;
+  color: #b9474d;
+  background: #fff1f1;
+}
+
+.message.success {
+  display: block;
+  color: #287a43;
+  background: #edfff1;
+}
+
+.login-text {
+  text-align: center;
+  margin-top: 22px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.login-text a {
+  color: var(--pink-dark);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.bottom-nav {
+  position: absolute;
+  height: 82px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-top: 1px solid #f1e8e8;
+  border-radius: 27px 27px 0 0;
+  background: white;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+  padding: 9px 4px 5px;
+  box-shadow: 0 -5px 20px #00000008;
+}
+
+.nav-item {
+  height: 58px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  color: #888;
+  font-size: 10px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.nav-item img {
+  width: 27px;
+  height: 27px;
+  object-fit: contain;
+}
+
+.nav-item.active {
+  color: var(--pink-dark);
+}
+
+.add-button {
+  position: absolute;
+  z-index: 3;
+  width: 43px;
+  height: 43px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--pink), var(--pink-dark));
+  border: 3px solid white;
+  color: white;
+  font-size: 29px;
+  left: 50%;
+  bottom: 62px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px #ed777b55;
+}
+
+@media(max-width:500px) {
+  body {
+    background: white;
+  }
+
+  .mobile {
+    max-width: none;
+    min-height: 0;
+    box-shadow: none;
+  }
+}
+
+@media(max-height:720px) {
+  .content {
+    padding-top: 10px;
+  }
+
+  .brand {
+    width: 75px;
+    height: 75px;
+    margin-bottom: 8px;
+  }
+
+  h1 {
+    font-size: 23px;
+  }
+
+  .description {
+    margin-bottom: 13px;
+  }
+
+  .form-group {
+    margin-bottom: 10px;
+  }
+
+  .form-group input {
+    height: 42px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<main class="mobile">
+
+<header class="header">
+  <button onclick="history.back()" aria-label="Voltar">←</button>
+</header>
+
+<section class="content">
+
+<div class="container">
+
+<div class="brand">
+  <img src="images/logo.png" alt="Logo CLOSET da Mari">
+</div>
+
+<h1>Crie sua conta!</h1>
+
+<p class="description">
+  Faça parte do universo da
+  <span class="highlight">CLOSET da Mari.</span>
+</p>
+
+<div id="message" class="message" role="alert"></div>
+
+<form id="cadastroForm">
+
+  <div class="form-group">
+    <label for="nome">Nome completo</label>
+    <input type="text" id="nome" placeholder="Digite seu nome" required>
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" id="email" placeholder="Digite seu email" required>
+  </div>
+
+  <div class="form-group">
+    <label for="senha">Senha</label>
+    <input type="password" id="senha" placeholder="Crie uma senha" minlength="6" required>
+  </div>
+
+  <div class="form-group">
+    <label for="confirmarSenha">Confirmar senha</label>
+    <input type="password" id="confirmarSenha" placeholder="Digite a senha novamente" minlength="6" required>
+  </div>
+
+  <button class="register" type="submit">
+    Criar minha conta
+  </button>
+
+</form>
+
+<p class="login-text">
+  Já possui uma conta?
+  <a href="perfil.html">Faça login!</a>
+</p>
+
+</div>
+</section>
+
+<button class="add-button" onclick="window.location.href='index.html'">+</button>
+
+<nav class="bottom-nav">
+
+  <a href="index.html" class="nav-item">
+    <img src="images/home.png" alt="">
+    <span>HOME</span>
+  </a>
+
+  <a href="favoritos.html" class="nav-item">
+    <img src="images/heart.png" alt="">
+    <span>FAVORITOS</span>
+  </a>
+
+  <a href="pedidos.html" class="nav-item">
+    <img src="images/package.png" alt="">
+    <span>PEDIDOS</span>
+  </a>
+
+  <a href="login.html" class="nav-item active">
+    <img src="images/user.png" alt="">
+    <span>PERFIL</span>
+  </a>
+
+</nav>
+
+</main>
+
+<script>
+document.getElementById("cadastroForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const nome = document.getElementById("nome").value.trim();
+  const email = document.getElementById("email").value.trim().toLowerCase();
+  const senha = document.getElementById("senha").value;
+  const confirmarSenha = document.getElementById("confirmarSenha").value;
+
+  const message = document.getElementById("message");
+
+  function mostrarMensagem(texto, tipo) {
+    message.textContent = texto;
+    message.className = "message " + tipo;
+  }
+
+  if (nome.length < 2) {
+    mostrarMensagem("Digite um nome válido.", "error");
+    return;
+  }
+
+  if (senha.length < 6) {
+    mostrarMensagem("A senha deve ter pelo menos 6 caracteres.", "error");
+    return;
+  }
+
+  if (senha !== confirmarSenha) {
+    mostrarMensagem("As senhas não coincidem.", "error");
+    return;
+  }
+
+  const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+
+  const usuarioExistente = usuarios.find(usuario => usuario.email === email);
+
+  if (usuarioExistente) {
+    mostrarMensagem("Este email já está cadastrado.", "error");
+    return;
+  }
+
+  usuarios.push({
+    id: Date.now(),
+    nome: nome,
+    email: email,
+    senha: senha
+  });
+
+  localStorage.setItem("usuarios", JSON.stringify(usuarios));
+
+  mostrarMensagem("Cadastro realizado com sucesso! Redirecionando...", "success");
+
+  setTimeout(() => {
+    window.location.href = "perfil.html";
+  }, 1500);
+});
+</script>
+
+</body>
+</html>

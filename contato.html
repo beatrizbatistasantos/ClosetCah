@@ -1,50 +1,248 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contato | Closet da Cah</title>
-<link rel="stylesheet" href="style.css">
-<script src="script.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato | Closet da Cah</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Ícones FontAwesome para complementar os canais e o mapa -->
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> -->
+    <script src="script.js" defer></script>
+
+    <!-- Estilos complementares exclusivos para a grade, formulário e mini mapa -->
+    <style>
+        .grade-contato {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            max-width: 1100px;
+            margin: 2rem auto 0;
+            text-align: left;
+        }
+
+        @media (min-width: 820px) {
+            .grade-contato {
+                grid-template-columns: 1fr 1.1fr;
+                align-items: start;
+            }
+        }
+
+        .cartao-contato {
+            margin: 0;
+            height: 100%;
+        }
+
+        .cartao-contato h3 {
+            margin-top: 1.25rem;
+            margin-bottom: 0.35rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .mapa-wrapper {
+            margin-top: 1rem;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .mapa-wrapper iframe {
+            width: 100%;
+            height: 220px;
+            border: 0;
+            display: block;
+        }
+
+        .mapa-legenda {
+            background-color: rgba(0, 0, 0, 0.04);
+            padding: 0.6rem 0.85rem;
+            font-size: 0.82rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .mapa-legenda a {
+            color: inherit;
+            font-weight: 600;
+            text-decoration: underline;
+        }
+
+        /* Formulário de Contato */
+        .form-grupo {
+            margin-bottom: 1rem;
+        }
+
+        .form-grupo label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 0.35rem;
+        }
+
+        .form-grupo input,
+        .form-grupo select,
+        .form-grupo textarea {
+            width: 100%;
+            padding: 0.75rem 0.9rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            box-sizing: border-box;
+        }
+
+        .form-grupo input:focus,
+        .form-grupo select:focus,
+        .form-grupo textarea:focus {
+            outline: none;
+            border-color: #a66d60;
+        }
+
+        .botao-full {
+            width: 100%;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+    </style>
 </head>
 <body>
-<header class="cabecalho">
-<a class="logo" href="index.html">Closet <span>da Cah</span></a>
-<nav>
-<a href="index.html">Início</a>
-<a href="produtos.html">Produtos</a>
-<a href="favoritos.html">Favoritos</a>
-<a href="carrinho.html">Carrinho <span id="total-carrinho">0</span></a>
-<a href="contato.html">Contato</a>
-</nav>
-</header>
-<main class="secao contato">
-<h1>Vamos conversar?</h1>
-<p class="descricao">
-     Estamos aqui para ajudar você a encontrar seu próximo look favorito.
-</p>
-<div class="cartao-contato">
-<h2>Closet da Cah</h2>
-<p>Moda feminina feita para valorizar seu estilo.</p>
-<h3>Atendimento</h3>
-<p>Entre em contato conosco pelo WhatsApp.</p>
-<a id="link-whatsapp" class="botao" href="#" target="_blank"
-        rel="noopener noreferrer">
-       Conversar pelo WhatsApp
-</a>
-<h3>Localização</h3>
-<p id="endereco-loja">
-       Consulte a proprietária para informações sobre a localização.
-</p>
-<h3>Entregas e trocas</h3>
-<p>
-       Consulte a loja para conhecer as opções de entrega,
-       prazos e condições de troca.
-</p>
-</div>
-</main>
-<footer>
-<p>© 2026 Closet da Cah — Moda feminina</p>
-</footer>
+    <header class="cabecalho">
+        <a class="logo" href="index.html">Closet <span>da Cah</span></a>
+        <nav>
+            <a href="index.html">Início</a>
+            <a href="produtos.html">Produtos</a>
+            <a href="favoritos.html">Favoritos</a>
+            <a href="carrinho.html">Carrinho <span id="total-carrinho">0</span></a>
+            <a href="contato.html" class="ativo">Contato</a>
+        </nav>
+    </header>
+
+    <main class="secao contato">
+        <h1>Vamos conversar?</h1>
+        <p class="descricao">
+            Estamos aqui para ajudar você a encontrar seu próximo look favorito.
+        </p>
+
+        <div class="grade-contato">
+            <!-- Coluna 1: Informações originais + Mini Mapa -->
+            <div class="cartao-contato">
+                <h2>Closet da Cah</h2>
+                <p>Moda feminina feita para valorizar seu estilo.</p>
+
+                <h3><i class="fab fa-whatsapp"></i> Atendimento</h3>
+                <p>Entre em contato conosco pelo WhatsApp.</p>
+                <a id="link-whatsapp" class="botao" href="https://wa.me/5513999999999?text=Olá,%20Closet%20da%20Cah!%20Vim%20pelo%20site." target="_blank" rel="noopener noreferrer">
+                    Conversar pelo WhatsApp
+                </a>
+
+                <h3><i class="fas fa-truck"></i> Entregas e trocas</h3>
+                <p>
+                    Consulte a loja para conhecer as opções de entrega,
+                    prazos e condições de troca.
+                </p>
+
+                <h3><i class="fas fa-map-marker-alt"></i> Localização</h3>
+                <p id="endereco-loja">
+                    Closet da Cah — Santa Rosa, Guarujá - SP. Consulte a proprietária para informações detalhadas sobre retirada.
+                </p>
+
+                <!-- Mini Mapa com o pino exato da Closet Da Cah -->
+                <div class="mapa-wrapper">
+                    <iframe 
+                        title="Mapa de localização Closet da Cah - Guarujá, SP"
+                        src="https://maps.google.com/maps?q=Closet%20Da%20Cah%20@-23.9941611,-46.2774837&t=&z=17&ie=UTF8&iwloc=&output=embed" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                    <div class="mapa-legenda">
+                        <span><i class="fas fa-location-dot"></i> Closet da Cah — Guarujá, SP</span>
+                        <a href="https://www.google.com/maps/place/Closet+Da+Cah/@-23.9941611,-46.2774837,17z" target="_blank" rel="noopener noreferrer">
+                            Abrir no Maps <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Coluna 2: Formulário de Mensagem Direta para o WhatsApp -->
+            <div class="cartao-contato">
+                <h2>Envie uma Mensagem</h2>
+                <p>Preencha os campos abaixo para iniciar o atendimento já com os detalhes da sua dúvida.</p>
+
+                <form id="form-contato" style="margin-top: 1.25rem;">
+                    <div class="form-grupo">
+                        <label for="nome">Seu Nome *</label>
+                        <input type="text" id="nome" name="nome" placeholder="Ex: Maria Silva" required>
+                    </div>
+
+                    <div class="form-grupo">
+                        <label for="telefone">Seu WhatsApp *</label>
+                        <input type="tel" id="telefone" name="telefone" placeholder="(13) 99999-9999" required>
+                    </div>
+
+                    <div class="form-grupo">
+                        <label for="assunto">Assunto</label>
+                        <select id="assunto" name="assunto">
+                            <option value="Dúvida sobre peça/tamanho">Dúvida sobre peça ou tamanho</option>
+                            <option value="Disponibilidade no estoque">Disponibilidade no estoque</option>
+                            <option value="Entrega / Retirada">Entrega ou retirada</option>
+                            <option value="Outro assunto">Outro assunto</option>
+                        </select>
+                    </div>
+
+                    <div class="form-grupo">
+                        <label for="mensagem">Mensagem *</label>
+                        <textarea id="mensagem" name="mensagem" rows="4" placeholder="Escreva aqui sua dúvida ou o nome da peça..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="botao botao-full">
+                        <i class="fab fa-whatsapp"></i> Enviar via WhatsApp
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2026 Closet da Cah — Moda feminina</p>
+    </footer>
+
+    <!-- Script de envio do formulário -->
+    <script>
+        document.getElementById('form-contato').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const nome = document.getElementById('nome').value.trim();
+            const telefone = document.getElementById('telefone').value.trim();
+            const assunto = document.getElementById('assunto').value;
+            const mensagem = document.getElementById('mensagem').value.trim();
+
+            const linkOriginal = document.getElementById('link-whatsapp').getAttribute('href');
+            const matchNumero = linkOriginal && linkOriginal.match(/wa\.me\/(\d+)/);
+            const numeroLoja = matchNumero ? matchNumero[1] : "5513999999999";
+
+            const textoFormatado = 
+                `Olá, *Closet da Cah*! Contato via site:\n\n` +
+                `👤 *Nome:* ${nome}\n` +
+                `📱 *WhatsApp:* ${telefone}\n` +
+                `📌 *Assunto:* ${assunto}\n\n` +
+                `💬 *Mensagem:*\n${mensagem}`;
+
+            const urlWhatsapp = `https://wa.me/${numeroLoja}?text=${encodeURIComponent(textoFormatado)}`;
+            window.open(urlWhatsapp, '_blank', 'noopener,noreferrer');
+        });
+    </script>
 </body>
 </html>

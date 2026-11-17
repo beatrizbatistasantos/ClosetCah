@@ -1,42 +1,894 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Produtos | Closet da Cah</title>
-<link rel="stylesheet" href="style.css">
-<script src="script.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CLOSET da Mari - Produto</title>
+
+  <style>
+    :root {
+      --pink: #ed777b;
+      --pink-dark: #d95f65;
+      --pink-light: #fff1f1;
+      --pink-soft: #f8e3e4;
+      --text: #242424;
+      --muted: #777;
+      --border: #eeeeee;
+      --white: #fff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100dvh;
+      display: flex;
+      justify-content: center;
+      background: #f7eeee;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+    }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .mobile {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      min-height: 100dvh;
+      background: var(--white);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 0 35px #00000012;
+    }
+
+    /* Cabeçalho */
+
+    .header {
+      height: 75px;
+      padding: 0 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+      border-bottom: 1px solid #f5eeee;
+    }
+
+    .back {
+      width: 42px;
+      height: 42px;
+      border: none;
+      background: var(--pink-light);
+      color: var(--pink-dark);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: .25s;
+    }
+
+    .back:hover {
+      background: var(--pink-soft);
+      transform: translateX(-3px);
+    }
+
+    .header-title {
+      font-family: Georgia, serif;
+      font-size: 23px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      color: var(--text);
+    }
+
+    .top-favorite {
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--border);
+      background: white;
+      border-radius: 14px;
+      font-size: 24px;
+      color: var(--pink-dark);
+      transition: .25s;
+    }
+
+    .top-favorite:hover {
+      background: var(--pink-light);
+      transform: scale(1.08);
+    }
+
+    .top-favorite.active {
+      background: var(--pink-light);
+      border-color: #f2c4c6;
+      color: var(--pink-dark);
+    }
+
+    /* Área principal */
+
+    .product-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 35px;
+      padding: 30px;
+      padding-bottom: 115px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    /* Imagem */
+
+    .image-column {
+      min-width: 0;
+    }
+
+    .product-image {
+      width: 100%;
+      height: 480px;
+      background: #faf2f2;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 5px 18px #0000000c;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: .4s;
+    }
+
+    .product-image:hover img {
+      transform: scale(1.04);
+    }
+
+    .image-caption {
+      text-align: center;
+      color: #aaa;
+      font-size: 11px;
+      margin-top: 13px;
+    }
+
+    /* Informações */
+
+    .product-info {
+      min-width: 0;
+      padding: 7px 0 20px;
+    }
+
+    .category-name {
+      display: inline-block;
+      color: var(--pink-dark);
+      background: var(--pink-light);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .7px;
+      padding: 8px 11px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+    }
+
+    .product-name {
+      font-family: Georgia, serif;
+      font-size: 31px;
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 11px;
+    }
+
+    .price {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 19px;
+      color: var(--text);
+    }
+
+    .description {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 22px;
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 20px 0;
+    }
+
+    .spec-title {
+      font-family: Georgia, serif;
+      font-size: 20px;
+      font-weight: 400;
+      margin-bottom: 16px;
+    }
+
+    .specifications {
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+      font-size: 12px;
+    }
+
+    .specifications p {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .specifications span:first-child {
+      font-weight: 600;
+    }
+
+    .specifications span:last-child {
+      color: var(--muted);
+      text-align: right;
+    }
+
+    /* Tamanhos */
+
+    .size-title {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 13px;
+    }
+
+    .sizes {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .size-button {
+      min-width: 43px;
+      height: 40px;
+      padding: 0 10px;
+      border: 1px solid #e5dede;
+      background: #fff;
+      border-radius: 10px;
+      color: var(--text);
+      font-size: 12px;
+      font-weight: 600;
+      transition: .2s;
+    }
+
+    .size-button:hover {
+      border-color: var(--pink);
+      color: var(--pink-dark);
+    }
+
+    .size-button.selected {
+      background: var(--pink);
+      border-color: var(--pink);
+      color: white;
+      box-shadow: 0 3px 9px #ed777b40;
+    }
+
+    .size-hint {
+      color: #999;
+      font-size: 10px;
+      margin-top: 10px;
+    }
+
+    /* Botões de ação */
+
+    .actions {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      gap: 12px;
+      padding: 15px 25px;
+      background: #fff;
+      border-top: 1px solid #f0eaea;
+      z-index: 5;
+      box-shadow: 0 -5px 20px #00000008;
+    }
+
+    .favorite-button {
+      width: 55px;
+      height: 49px;
+      flex-shrink: 0;
+      border: 1px solid #edc6c8;
+      border-radius: 13px;
+      background: var(--pink-light);
+      color: var(--pink-dark);
+      font-size: 25px;
+      transition: .25s;
+    }
+
+    .favorite-button:hover {
+      background: var(--pink-soft);
+      transform: scale(1.05);
+    }
+
+    .favorite-button.active {
+      background: var(--pink);
+      color: white;
+      border-color: var(--pink);
+    }
+
+    .buy-button {
+      flex: 1;
+      height: 49px;
+      border: none;
+      border-radius: 13px;
+      background: linear-gradient(135deg, var(--pink), var(--pink-dark));
+      color: white;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      box-shadow: 0 4px 13px #ed777b40;
+      transition: .25s;
+    }
+
+    .buy-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 7px 17px #ed777b55;
+    }
+
+    .buy-button:active {
+      transform: scale(.98);
+    }
+
+    /* Produto não encontrado */
+
+    .not-found {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--muted);
+    }
+
+    .not-found h2 {
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .not-found button {
+      margin-top: 20px;
+      padding: 13px 22px;
+      background: var(--pink);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-weight: bold;
+    }
+
+    /* Responsividade */
+
+    @media (max-width: 650px) {
+      body {
+        background: white;
+      }
+
+      .mobile {
+        max-width: none;
+        box-shadow: none;
+      }
+
+      .header {
+        height: 65px;
+        padding: 0 16px;
+      }
+
+      .header-title {
+        font-size: 21px;
+      }
+
+      .product-layout {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        padding: 0 0 110px;
+      }
+
+      .product-image {
+        height: min(390px, 52vh);
+        border-radius: 0;
+        box-shadow: none;
+      }
+
+      .image-caption {
+        display: none;
+      }
+
+      .product-info {
+        padding: 22px 19px 25px;
+      }
+
+      .product-name {
+        font-size: 27px;
+      }
+
+      .price {
+        font-size: 22px;
+      }
+
+      .actions {
+        padding: 13px 16px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .product-image {
+        height: 300px;
+      }
+
+      .product-info {
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+
+      .product-name {
+        font-size: 24px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        transition: none !important;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<header class="cabecalho">
-<a class="logo" href="index.html">Closet <span>da Cah</span></a>
-<nav>
-<a href="index.html">Início</a>
-<a href="produtos.html">Produtos</a>
-<a href="favoritos.html">Favoritos</a>
-<a href="carrinho.html">Carrinho <span id="total-carrinho">0</span></a>
-<a href="contato.html">Contato</a>
-</nav>
-</header>
-<main class="secao">
-<h1>Nossa vitrine</h1>
-<p class="descricao">Encontre uma peça para chamar de sua.</p>
-<input id="pesquisa" class="campo" type="search"
-     placeholder="Pesquisar produto..." aria-label="Pesquisar produto">
-<div class="filtros">
-<button class="filtro ativo" data-categoria="Todos">Todos</button>
-<button class="filtro" data-categoria="Vestidos">Vestidos</button>
-<button class="filtro" data-categoria="Conjuntos">Conjuntos</button>
-<button class="filtro" data-categoria="Blusas">Blusas</button>
-<button class="filtro" data-categoria="Acessórios">Acessórios</button>
-</div>
-<div id="lista-produtos" class="grade-produtos"></div>
-<p id="mensagem-vazia" class="centralizado" hidden>
-     Nenhum produto encontrado.
-</p>
+
+<main class="mobile">
+
+  <!-- Cabeçalho -->
+
+  <header class="header">
+
+    <button class="back" onclick="history.back()" aria-label="Voltar">
+      <svg width="25" height="25" viewBox="0 0 36 36"
+           fill="none" stroke="currentColor" stroke-width="2.5"
+           stroke-linecap="round" stroke-linejoin="round">
+        <path d="M31 18H5M17 7L6 18L17 29"/>
+      </svg>
+    </button>
+
+    <span class="header-title">CLOSET</span>
+
+    <button class="top-favorite" id="topFavorite"
+            aria-label="Adicionar aos favoritos">
+      ♡
+    </button>
+
+  </header>
+
+  <!-- Produto -->
+
+  <div class="product-layout" id="productLayout">
+
+    <div class="image-column">
+
+      <div class="product-image">
+        <img id="productImage" src="" alt="">
+      </div>
+
+      <p class="image-caption">
+        CLOSET DA MARI • MODA FEMININA
+      </p>
+
+    </div>
+
+    <section class="product-info">
+
+      <p class="category-name" id="category"></p>
+
+      <h1 class="product-name" id="productName"></h1>
+
+      <p class="price" id="productPrice"></p>
+
+      <p class="description" id="productDescription"></p>
+
+      <div class="divider"></div>
+
+      <h2 class="spec-title">Detalhes do produto</h2>
+
+      <div class="specifications" id="specifications"></div>
+
+      <div class="divider"></div>
+
+      <h2 class="size-title">Escolha seu tamanho:</h2>
+
+      <div class="sizes" id="sizes"></div>
+
+      <p class="size-hint" id="sizeHint">
+        Selecione uma opção antes de continuar.
+      </p>
+
+    </section>
+
+  </div>
+
+  <!-- Produto não encontrado -->
+
+  <div class="not-found" id="notFound" style="display:none;">
+    <h2>Produto não encontrado!</h2>
+    <p>Não conseguimos localizar esse produto.</p>
+    <button onclick="window.location.href='index.html'">
+      Voltar para a loja
+    </button>
+  </div>
+
+  <!-- Ações -->
+
+  <div class="actions" id="actions">
+
+    <button class="favorite-button" id="favoriteButton"
+            aria-label="Adicionar aos favoritos">
+      ♡
+    </button>
+
+    <button class="buy-button" onclick="buyProduct()">
+      COMPRAR
+    </button>
+
+  </div>
+
 </main>
-<footer>
-<p>© 2026 Closet da Cah — Moda feminina</p>
-</footer>
+
+<script>
+
+  // Banco de produtos
+
+  const produtos = {
+
+    vestido2: {
+      nome: "Vestido Feminino",
+      categoria: "MODA FEMININA / VESTIDOS",
+      preco: "R$ 00,00",
+      imagem: "images/vestido2.jpg",
+      descricao: "Um vestido delicado e elegante, perfeito para compor looks modernos e sofisticados.",
+      tamanhos: ["P", "M", "G", "GG"],
+      especificacoes: {
+        "Modelo": "Vestido feminino",
+        "Material": "Informar tecido",
+        "Comprimento": "Informar comprimento",
+        "Cor": "Informar cor",
+        "Estilo": "Casual / Elegante"
+      }
+    },
+
+    blusa1: {
+      nome: "Blusa Feminina",
+      categoria: "MODA FEMININA / BLUSAS",
+      preco: "R$ 00,00",
+      imagem: "images/blusa1.jpg",
+      descricao: "Uma blusa feminina moderna e versátil, perfeita para compor diferentes looks.",
+      tamanhos: ["P", "M", "G", "GG"],
+      especificacoes: {
+        "Modelo": "Blusa feminina",
+        "Material": "Informar tecido",
+        "Manga": "Informar tipo de manga",
+        "Cor": "Informar cor",
+        "Estilo": "Casual"
+      }
+    },
+
+    calca: {
+      nome: "Calça Feminina",
+      categoria: "MODA FEMININA / CALÇAS",
+      preco: "R$ 00,00",
+      imagem: "images/calça.png",
+      descricao: "Uma calça feminina moderna e versátil, ideal para criar looks elegantes e confortáveis.",
+      tamanhos: ["P", "M", "G", "GG"],
+      especificacoes: {
+        "Modelo": "Calça feminina",
+        "Material": "Informar tecido",
+        "Comprimento": "Longo",
+        "Cor": "Informar cor",
+        "Estilo": "Casual / Elegante"
+      }
+    },
+
+    saia: {
+      nome: "Saia Feminina",
+      categoria: "MODA FEMININA / SAIAS",
+      preco: "R$ 00,00",
+      imagem: "images/saia.png",
+      descricao: "Uma saia feminina delicada e versátil, perfeita para compor looks modernos, elegantes e estilosos.",
+      tamanhos: ["P", "M", "G", "GG"],
+      especificacoes: {
+        "Modelo": "Saia feminina",
+        "Material": "Informar tecido",
+        "Comprimento": "Informar comprimento",
+        "Cor": "Informar cor",
+        "Estilo": "Casual / Elegante"
+      }
+    },
+
+    bolsa: {
+      nome: "Bolsa Feminina",
+      categoria: "MODA FEMININA / BOLSAS",
+      preco: "R$ 00,00",
+      imagem: "images/bolsa.png",
+      descricao: "Uma bolsa feminina moderna e elegante, perfeita para complementar diferentes looks e acompanhar você em diversas ocasiões.",
+      tamanhos: ["Único"],
+      especificacoes: {
+        "Modelo": "Bolsa feminina",
+        "Material": "Informar material",
+        "Fechamento": "Informar tipo de fechamento",
+        "Cor": "Informar cor",
+        "Estilo": "Casual / Elegante"
+      }
+    },
+
+    bijuteria: {
+      nome: "Bijuteria Feminina",
+      categoria: "ACESSÓRIOS / BIJUTERIAS",
+      preco: "R$ 00,00",
+      imagem: "images/bijuterias.png",
+      tamanhos: ["Único"],
+      especificacoes: {
+        "Modelo": "Bijuteria feminina",
+        "Material": "Informar material",
+        "Cor": "Informar cor",
+        "Estilo": "Casual / Elegante"
+      },
+      descricao: "Bijuteria feminina ideal para complementar diferentes looks."
+    },
+
+    casaco: {
+      nome: "Casaco Feminino",
+      categoria: "MODA FEMININA / CASACOS",
+      preco: "R$ 00,00",
+      imagem: "images/casaco.png",
+      tamanhos: ["P", "M", "G", "GG"],
+      especificacoes: {
+        "Modelo": "Casaco feminino",
+        "Material": "Informar material",
+        "Fechamento": "Informar tipo de fechamento",
+        "Cor": "Informar cor",
+        "Estilo": "Casual / Elegante"
+      },
+      descricao: "Casaco feminino confortável e versátil, ideal para complementar diferentes looks."
+    },
+
+    fitness: {
+      nome: "Conjunto Fitness Feminino",
+      categoria: "MODA FEMININA / FITNESS",
+      preco: "R$ 00,00",
+      imagem: "images/fitness.png",
+      tamanhos: ["P", "M", "G", "GG"],
+      especificacoes: {
+        "Modelo": "Conjunto fitness feminino",
+        "Material": "Informar material",
+        "Composição": "Informar composição do tecido",
+        "Cor": "Informar cor",
+        "Estilo": "Esportivo"
+      },
+      descricao: "Peça fitness confortável e versátil, ideal para treinos e atividades físicas."
+    }
+
+  };
+
+  // Identificar produto pela URL
+
+  const parametros = new URLSearchParams(window.location.search);
+  const id = parametros.get("id");
+
+  const produto = produtos[id];
+
+  let tamanhoSelecionado = null;
+
+  // Recuperar favoritos
+
+  function obterFavoritos() {
+    try {
+      const dados = JSON.parse(localStorage.getItem("favoritos"));
+      return Array.isArray(dados) ? dados : [];
+    } catch (error) {
+      return [];
+    }
+  }
+
+  // Salvar favoritos
+
+  function salvarFavoritos(favoritos) {
+    localStorage.setItem("favoritos", JSON.stringify(favoritos));
+  }
+
+  // Verificar se o produto já está favoritado
+
+  function verificarFavorito() {
+    const favoritos = obterFavoritos();
+
+    return favoritos.some(item => item.id === id);
+  }
+
+  // Atualizar os dois botões de favorito
+
+  function atualizarBotoesFavorito() {
+    const ativo = verificarFavorito();
+
+    const favoriteButton = document.getElementById("favoriteButton");
+    const topFavorite = document.getElementById("topFavorite");
+
+    favoriteButton.textContent = ativo ? "♥" : "♡";
+    topFavorite.textContent = ativo ? "♥" : "♡";
+
+    favoriteButton.classList.toggle("active", ativo);
+    topFavorite.classList.toggle("active", ativo);
+
+    favoriteButton.setAttribute(
+      "aria-label",
+      ativo ? "Remover dos favoritos" : "Adicionar aos favoritos"
+    );
+
+    topFavorite.setAttribute(
+      "aria-label",
+      ativo ? "Remover dos favoritos" : "Adicionar aos favoritos"
+    );
+  }
+
+  // Adicionar ou remover favorito
+
+  function toggleFavorite() {
+    if (!produto) return;
+
+    let favoritos = obterFavoritos();
+
+    const jaFavoritado = favoritos.some(item => item.id === id);
+
+    if (jaFavoritado) {
+      favoritos = favoritos.filter(item => item.id !== id);
+    } else {
+      favoritos.push({
+        id: id,
+        nome: produto.nome,
+        categoria: produto.categoria,
+        preco: produto.preco,
+        imagem: produto.imagem
+      });
+    }
+
+    salvarFavoritos(favoritos);
+    atualizarBotoesFavorito();
+  }
+
+  document.getElementById("favoriteButton")
+    .addEventListener("click", toggleFavorite);
+
+  document.getElementById("topFavorite")
+    .addEventListener("click", toggleFavorite);
+
+  // Exibir informações do produto
+
+  if (produto) {
+
+    document.title = "CLOSET - " + produto.nome;
+
+    const productImage = document.getElementById("productImage");
+
+    productImage.src = produto.imagem;
+    productImage.alt = produto.nome;
+
+    productImage.onerror = function() {
+      this.alt = "Imagem não encontrada: " + produto.nome;
+    };
+
+    document.getElementById("category").textContent = produto.categoria;
+    document.getElementById("productName").textContent = produto.nome;
+    document.getElementById("productPrice").textContent = produto.preco;
+    document.getElementById("productDescription").textContent = produto.descricao;
+
+    // Especificações
+
+    const specifications = document.getElementById("specifications");
+
+    Object.entries(produto.especificacoes).forEach(([nome, valor]) => {
+
+      const linha = document.createElement("p");
+      const titulo = document.createElement("span");
+      const detalhe = document.createElement("span");
+
+      titulo.textContent = nome;
+      detalhe.textContent = valor;
+
+      linha.append(titulo, detalhe);
+      specifications.appendChild(linha);
+
+    });
+
+    // Tamanhos
+
+    const sizes = document.getElementById("sizes");
+
+    produto.tamanhos.forEach(tamanho => {
+
+      const button = document.createElement("button");
+
+      button.className = "size-button";
+      button.textContent = tamanho;
+
+      button.addEventListener("click", () => {
+
+        document.querySelectorAll(".size-button").forEach(item => {
+          item.classList.remove("selected");
+        });
+
+        button.classList.add("selected");
+        tamanhoSelecionado = tamanho;
+
+        document.getElementById("sizeHint").textContent =
+          "Tamanho selecionado: " + tamanho;
+
+      });
+
+      sizes.appendChild(button);
+
+    });
+
+    atualizarBotoesFavorito();
+
+  } else {
+
+    document.getElementById("productLayout").style.display = "none";
+    document.getElementById("actions").style.display = "none";
+    document.getElementById("notFound").style.display = "block";
+
+  }
+
+  // Comprar produto
+
+  function buyProduct() {
+
+    if (!produto) {
+      alert("Produto não encontrado!");
+      return;
+    }
+
+    if (!tamanhoSelecionado) {
+      alert("Escolha um tamanho antes de continuar!");
+      return;
+    }
+
+    let pedidos = [];
+
+    try {
+      pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
+
+      if (!Array.isArray(pedidos)) {
+        pedidos = [];
+      }
+    } catch (error) {
+      pedidos = [];
+    }
+
+    const novoPedido = {
+      id: Date.now(),
+      nome: produto.nome,
+      categoria: produto.categoria,
+      preco: produto.preco,
+      imagem: produto.imagem,
+      tamanho: tamanhoSelecionado,
+      data: new Date().toLocaleDateString("pt-BR")
+    };
+
+    pedidos.push(novoPedido);
+
+    localStorage.setItem("pedidos", JSON.stringify(pedidos));
+
+    alert("Produto adicionado aos seus pedidos!");
+
+    window.location.href = "pedidos.html";
+
+  }
+
+</script>
+
 </body>
 </html>

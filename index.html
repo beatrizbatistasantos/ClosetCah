@@ -1,53 +1,1243 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Closet da Cah | Moda feminina</title>
-<link rel="stylesheet" href="style.css">
-<script src="script.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CLOSET da Mari - Início</title>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --pink: #ed777b;
+      --pink-dark: #d95f65;
+      --pink-light: #fff1f1;
+      --pink-soft: #f8e3e4;
+      --text: #242424;
+      --muted: #777;
+      --white: #fff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-height: 100vh;
+      background: #f3f3f3;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+    }
+
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    a { color: inherit; text-decoration: none; }
+
+    .mobile {
+      position: relative;
+      width: 100%;
+      max-width: 430px;
+      min-height: 100vh;
+      background: white;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 0 25px rgba(0,0,0,.07);
+      overflow: hidden;
+    }
+
+    /* CABEÇALHO */
+
+    .header {
+      height: 75px;
+      padding: 0 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+      background: white;
+      border-bottom: 1px solid #f5f5f5;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo { display: flex; align-items: center; }
+
+    .logo img {
+      width: 53px;
+      height: 53px;
+      object-fit: contain;
+      transition: transform .25s;
+    }
+
+    .logo:hover img { transform: scale(1.1); }
+
+    /* FOTO DE PERFIL NO CABEÇALHO */
+
+    .header-profile {
+      width: 43px;
+      height: 43px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid var(--pink);
+      display: none;
+      transition: .25s;
+      background: var(--pink-light);
+    }
+
+    .header-profile:hover {
+      transform: scale(1.08);
+      box-shadow: 0 3px 10px #ed777b50;
+    }
+
+    .header-profile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .header-actions { display: flex; align-items: center; gap: 10px; }
+
+    .icon-button {
+      position: relative;
+      width: 39px;
+      height: 39px;
+      border: 1px solid #e5e5e5;
+      border-radius: 50%;
+      background: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: .25s;
+    }
+
+    .icon-button img { width: 22px; height: 22px; object-fit: contain; }
+
+    .icon-button:hover {
+      background: var(--pink-light);
+      border-color: var(--pink);
+      transform: translateY(-3px);
+    }
+
+    /* PESQUISA */
+
+    .search-area { padding: 15px 17px 18px; background: white; }
+
+    .search-box {
+      height: 42px;
+      width: 100%;
+      border: 1px solid #e6e6e6;
+      border-radius: 25px;
+      display: flex;
+      align-items: center;
+      padding: 0 13px;
+      gap: 9px;
+      transition: .2s;
+    }
+
+    .search-box:focus-within {
+      border-color: var(--pink);
+      box-shadow: 0 0 0 3px rgba(237,119,123,.10);
+    }
+
+    .search-box svg {
+      width: 20px;
+      height: 20px;
+      stroke: #777;
+      stroke-width: 1.7;
+      fill: none;
+      flex-shrink: 0;
+    }
+
+    .search-box input {
+      width: 100%;
+      border: none;
+      outline: none;
+      background: transparent;
+      font-size: 12px;
+    }
+
+    /* BOAS-VINDAS */
+
+    .welcome-card {
+      margin: 0 15px 22px;
+      padding: 19px;
+      border-radius: 12px;
+      background: linear-gradient(120deg, #fff0f0, #f8dfe1);
+      border: 1px solid #f4dada;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      animation: aparecer .5s ease;
+    }
+
+    @keyframes aparecer {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .welcome-info { flex: 1; min-width: 0; }
+
+    .welcome-info small {
+      color: var(--pink-dark);
+      font-size: 9px;
+      letter-spacing: 1.5px;
+      font-weight: bold;
+    }
+
+    .welcome-info h2 {
+      font-size: 20px;
+      margin: 7px 0;
+      overflow-wrap: anywhere;
+    }
+
+    .welcome-info p {
+      font-size: 11px;
+      line-height: 1.5;
+      color: #666;
+    }
+
+    .welcome-icon {
+      font-size: 42px;
+      color: var(--pink);
+      flex-shrink: 0;
+    }
+
+    .welcome-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 13px;
+    }
+
+    .welcome-actions button,
+    .welcome-actions a {
+      border: none;
+      border-radius: 5px;
+      padding: 9px 12px;
+      font-size: 10px;
+      font-weight: bold;
+      background: var(--pink);
+      color: white;
+      cursor: pointer;
+    }
+
+    .welcome-actions .logout-button {
+      background: white;
+      color: var(--pink-dark);
+      border: 1px solid #edc7c8;
+    }
+
+    /* NOTIFICAÇÃO */
+
+    .notification-message {
+      display: none;
+      margin: 0 15px 15px;
+      padding: 12px 14px;
+      background: #fff4f4;
+      border: 1px solid #f3dada;
+      border-radius: 8px;
+      color: #8e4145;
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .notification-message.show { display: block; }
+
+    /* CONTEÚDO */
+
+    .content { flex: 1; padding-bottom: 100px; }
+
+    /* BANNER */
+
+    .hero {
+      position: relative;
+      height: 225px;
+      margin: 0 14px 25px;
+      overflow: hidden;
+      border-radius: 12px;
+      background: #f5dfe0;
+    }
+
+    .hero > img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .6s;
+    }
+
+    .hero:hover > img { transform: scale(1.04); }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      background: linear-gradient(90deg, rgba(0,0,0,.58), rgba(0,0,0,.18), transparent);
+      color: white;
+    }
+
+    .hero-overlay small { font-size: 9px; letter-spacing: 2px; margin-bottom: 10px; }
+    .hero-overlay h1 { max-width: 210px; font-size: 27px; line-height: 1.15; margin-bottom: 10px; }
+    .hero-overlay p { font-size: 11px; margin-bottom: 16px; }
+
+    .hero-overlay button {
+      border: none;
+      border-radius: 4px;
+      padding: 11px 17px;
+      background: var(--pink);
+      color: white;
+      font-size: 10px;
+      font-weight: bold;
+      letter-spacing: .5px;
+      transition: .25s;
+    }
+
+    .hero-overlay button:hover { background: var(--pink-dark); transform: translateY(-2px); }
+
+    /* TÍTULOS */
+
+    .section-heading {
+      padding: 0 17px;
+      margin: 25px 0 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .section-heading h2 { font-size: 17px; font-weight: 600; }
+
+    .section-heading a {
+      color: var(--pink-dark);
+      font-size: 10px;
+      font-weight: bold;
+    }
+
+    .section-subtitle {
+      padding: 0 17px;
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: -8px;
+      margin-bottom: 16px;
+    }
+
+    /* CATEGORIAS */
+
+    .categories {
+      padding: 5px 16px 12px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 19px 12px;
+    }
+
+    .category {
+      min-width: 0;
+      border: none;
+      background: transparent;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      gap: 7px;
+      color: var(--text);
+      transition: transform .25s;
+    }
+
+    .category:hover { transform: translateY(-5px); }
+
+    .category-image {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      overflow: hidden;
+      background: var(--pink-light);
+      border: 2px solid #f3dddd;
+      transition: .25s;
+    }
+
+    .category:hover .category-image {
+      border-color: var(--pink);
+      box-shadow: 0 5px 12px rgba(237,119,123,.18);
+    }
+
+    .category-image img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      transition: transform .3s;
+    }
+
+    .category:hover img { transform: scale(1.08); }
+    .category span { font-size: 10px; font-weight: 500; white-space: nowrap; }
+
+    /* PRODUTOS */
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      padding: 0 15px;
+    }
+
+    .product-card {
+      min-width: 0;
+      background: white;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform .25s, box-shadow .25s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 7px 18px rgba(0,0,0,.09);
+    }
+
+    .product-image {
+      height: 175px;
+      position: relative;
+      overflow: hidden;
+      background: #f8f4f4;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .35s;
+    }
+
+    .product-card:hover .product-image img { transform: scale(1.07); }
+
+    .product-tag {
+      position: absolute;
+      top: 9px;
+      left: 9px;
+      padding: 5px 8px;
+      background: var(--pink);
+      color: white;
+      border-radius: 3px;
+      font-size: 8px;
+      font-weight: bold;
+    }
+
+    .product-info { padding: 11px; }
+    .product-info h3 { font-size: 12px; font-weight: 500; margin-bottom: 6px; }
+    .product-info p { color: var(--pink-dark); font-size: 12px; font-weight: bold; }
+    .product-info small { display: block; margin-top: 5px; font-size: 9px; color: #999; }
+
+    .no-results {
+      display: none;
+      padding: 25px 15px;
+      text-align: center;
+      color: #777;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .no-results strong { display: block; color: var(--pink-dark); font-size: 15px; margin-bottom: 5px; }
+
+    /* BENEFÍCIOS */
+
+    .benefits {
+      margin: 10px 15px 25px;
+      padding: 19px 8px;
+      background: #fff4f4;
+      border: 1px solid #f8e5e5;
+      border-radius: 9px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 7px;
+      text-align: center;
+    }
+
+    .benefit-item { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+
+    .benefit-icon {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--pink);
+      font-size: 19px;
+    }
+
+    .benefit-item strong { font-size: 9px; }
+    .benefit-item small { color: #888; font-size: 8px; }
+
+    /* MENSAGEM DA LOJA */
+
+    .store-message {
+      margin: 20px 15px 30px;
+      padding: 24px 16px;
+      background: linear-gradient(135deg, #f9e3e4, #fff2f2);
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .store-message .mini-title {
+      color: var(--pink-dark);
+      font-size: 9px;
+      letter-spacing: 2px;
+      margin-bottom: 9px;
+    }
+
+    .store-message h2 { font-size: 19px; margin-bottom: 9px; }
+
+    .store-message p { font-size: 11px; color: #666; line-height: 1.6; }
+
+    .store-message button {
+      margin-top: 15px;
+      padding: 11px 18px;
+      background: var(--pink);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: bold;
+      transition: .25s;
+    }
+
+    .store-message button:hover { background: var(--pink-dark); transform: scale(1.04); }
+
+    /* RODAPÉ */
+
+    .footer {
+      padding: 22px 15px 110px;
+      background: #292929;
+      color: white;
+      text-align: center;
+    }
+
+    .footer h2 { font-size: 18px; letter-spacing: 2px; margin-bottom: 8px; }
+    .footer p { color: #ccc; font-size: 10px; line-height: 1.6; }
+
+    .footer .copyright {
+      margin-top: 18px;
+      padding-top: 13px;
+      border-top: 1px solid #444;
+      font-size: 9px;
+      color: #aaa;
+    }
+
+    /* BOTÃO ADICIONAR */
+
+    .add-button {
+      position: fixed;
+      z-index: 5;
+      bottom: 67px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 42px;
+      height: 42px;
+      border: 3px solid white;
+      border-radius: 50%;
+      background: #222;
+      color: white;
+      font-size: 29px;
+      font-weight: 300;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 3px 10px rgba(0,0,0,.2);
+      transition: .25s;
+    }
+
+    .add-button:hover {
+      transform: translateX(-50%) scale(1.12);
+      background: var(--pink);
+    }
+
+    /* NAVEGAÇÃO */
+
+    .bottom-nav {
+      position: fixed;
+      z-index: 4;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 430px;
+      height: 76px;
+      padding: 8px 4px 5px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      align-items: center;
+      background: white;
+      border: 1px solid #eee;
+      border-radius: 24px 24px 0 0;
+      box-shadow: 0 -4px 15px rgba(0,0,0,.05);
+    }
+
+    .nav-item {
+      height: 55px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 4px;
+      color: #555;
+      font-size: 9px;
+      transition: .2s;
+    }
+
+    .nav-item img { width: 25px; height: 25px; object-fit: contain; }
+    .nav-item:hover { transform: translateY(-3px); color: var(--pink); }
+    .nav-item.active { color: var(--pink); font-weight: bold; }
+
+    /* DESKTOP */
+
+    @media (min-width: 700px) {
+      body { padding: 25px 0; }
+
+      .mobile {
+        max-width: 900px;
+        min-height: 100vh;
+        border-radius: 12px;
+      }
+
+      .hero { height: 330px; margin: 0 25px 30px; }
+      .hero-overlay { padding: 40px; }
+      .hero-overlay h1 { font-size: 38px; max-width: 300px; }
+      .hero-overlay p { font-size: 13px; }
+
+      .categories {
+        grid-template-columns: repeat(8, minmax(0, 1fr));
+        padding-left: 25px;
+        padding-right: 25px;
+        gap: 16px;
+      }
+
+      .category span { font-size: 11px; }
+      .section-heading { padding: 0 25px; }
+      .section-subtitle { padding: 0 25px; }
+
+      .products {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        padding: 0 25px;
+        gap: 18px;
+      }
+
+      .product-image { height: 210px; }
+      .benefits { margin-left: 25px; margin-right: 25px; }
+      .store-message { margin-left: 25px; margin-right: 25px; }
+      .bottom-nav { max-width: 900px; }
+    }
+
+    @media (max-width: 350px) {
+      .categories { column-gap: 7px; }
+      .category span { font-size: 9px; }
+      .product-image { height: 145px; }
+      .hero-overlay h1 { font-size: 22px; }
+      .welcome-info h2 { font-size: 17px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<header class="cabecalho">
-<a class="logo" href="index.html">Closet <span>da Cah</span></a>
-<nav>
-<a href="index.html">Início</a>
-<a href="produtos.html">Produtos</a>
-<a href="favoritos.html">Favoritos</a>
-<a href="carrinho.html">Carrinho <span id="total-carrinho">0</span></a>
-<a href="contato.html">Contato</a>
-</nav>
-</header>
-<main>
-<section class="banner">
-<div class="banner-conteudo">
-<p class="subtitulo">MODA FEMININA</p>
-<h1>Seu estilo, sua essência.</h1>
-<p>Encontre peças que combinam com você e com cada momento da sua vida.</p>
-<a href="produtos.html" class="botao">Conheça a coleção</a>
-</div>
-</section>
-<section class="secao">
-<h2>Novidades para você</h2>
-<p class="descricao">Descubra as peças que chegaram ao nosso closet.</p>
-<div class="carrossel">
-<button class="seta" id="anterior" aria-label="Novidade anterior">‹</button>
-<div id="novidades" class="grade-produtos"></div>
-<button class="seta" id="proximo" aria-label="Próxima novidade">›</button>
-</div>
-<div class="centralizado">
-<a href="produtos.html" class="botao botao-claro">Ver todos os produtos</a>
-</div>
-</section>
-<section class="chamada">
-<h2>Encontre seu próximo look favorito</h2>
-<p>Explore vestidos, conjuntos, blusas e acessórios.</p>
-<a href="produtos.html" class="botao">Explorar vitrine</a>
-</section>
+
+<main class="mobile">
+
+  <header class="header">
+
+    <div class="header-left">
+
+      <!-- FOTO DE PERFIL: APARECE SOMENTE QUANDO ESTIVER LOGADO -->
+      <a href="perfil.html" class="header-profile" id="headerProfile" aria-label="Meu perfil">
+        <img src="images/user.png" alt="Foto de perfil" id="headerProfilePhoto">
+      </a>
+
+      <a href="index.html" class="logo">
+        <img src="images/logo.png" alt="CLOSET da Mari">
+      </a>
+
+    </div>
+
+    <div class="header-actions">
+
+      <button class="icon-button"
+        aria-label="Sacola"
+        onclick="window.location.href='pedidos.html'">
+        <img src="images/bag.png" alt="">
+      </button>
+
+      <button class="icon-button"
+        aria-label="Notificações"
+        onclick="mostrarNotificacao()">
+        <img src="images/bell.png" alt="">
+      </button>
+
+    </div>
+  </header>
+
+  <!-- PESQUISA -->
+
+  <div class="search-area">
+    <label class="search-box">
+      <svg viewBox="0 0 24 24">
+        <circle cx="10.5" cy="10.5" r="8"/>
+        <path d="m16.5 16.5 5 5"/>
+      </svg>
+
+      <input
+        type="search"
+        id="searchInput"
+        placeholder="O que você está procurando?"
+        aria-label="Pesquisar produtos">
+    </label>
+  </div>
+
+  <!-- BOAS-VINDAS PERSONALIZADAS -->
+
+  <div class="welcome-card">
+
+    <div class="welcome-info">
+      <small id="welcomeLabel">BEM-VINDA AO CLOSET</small>
+
+      <h2 id="welcomeTitle">Olá! Seja bem-vinda ♡</h2>
+
+      <p id="welcomeMessage">
+        Estamos felizes em ter você aqui. Explore nossas peças e encontre seu próximo look!
+      </p>
+
+      <div class="welcome-actions" id="welcomeActions">
+        <a href="perfil.html">ENTRAR NA CONTA</a>
+        <a href="cadastro.html" class="logout-button">CADASTRAR</a>
+      </div>
+    </div>
+
+    <div class="welcome-icon">♡</div>
+
+  </div>
+
+  <div class="notification-message" id="notificationMessage"></div>
+
+  <!-- CONTEÚDO -->
+
+  <section class="content">
+
+    <!-- BANNER PRINCIPAL -->
+
+    <div class="hero">
+      <img src="images/vestido2.jpg" alt="Coleção CLOSET">
+
+      <div class="hero-overlay">
+        <small>COLEÇÃO ESPECIAL</small>
+        <h1>Seu estilo, sua essência.</h1>
+        <p>Encontre peças que combinam com você.</p>
+
+        <button onclick="abrirProduto('vestido2')">
+          CONFERIR COLEÇÃO
+        </button>
+      </div>
+    </div>
+
+    <!-- CATEGORIAS -->
+
+    <div class="section-heading">
+      <h2>Explore nossas categorias</h2>
+    </div>
+
+    <p class="section-subtitle">
+      Encontre tudo o que combina com seu estilo.
+    </p>
+
+    <div class="categories" id="categorias">
+
+      <button class="category" onclick="abrirProduto('vestido2')">
+        <div class="category-image">
+          <img src="images/vestido2.jpg" alt="Vestidos">
+        </div>
+        <span>Vestidos</span>
+      </button>
+
+      <button class="category" onclick="abrirProduto('blusa1')">
+        <div class="category-image">
+          <img src="images/blusa1.jpg" alt="Blusas">
+        </div>
+        <span>Blusas</span>
+      </button>
+
+      <button class="category" onclick="abrirProduto('calca')">
+        <div class="category-image">
+          <img src="images/calça.png" alt="Calças">
+        </div>
+        <span>Calças</span>
+      </button>
+
+      <button class="category" onclick="abrirProduto('saia')">
+        <div class="category-image">
+          <img src="images/saia.png" alt="Saias">
+        </div>
+        <span>Saias</span>
+      </button>
+
+      <button class="category" onclick="abrirProduto('bolsa')">
+        <div class="category-image">
+          <img src="images/bolsa.png" alt="Bolsas">
+        </div>
+        <span>Bolsas</span>
+      </button>
+
+      <button class="category" onclick="abrirProduto('bijuteria')">
+        <div class="category-image">
+          <img src="images/bijuterias.png" alt="Bijuterias">
+        </div>
+        <span>Bijuterias</span>
+      </button>
+
+      <button class="category" onclick="abrirProduto('casaco')">
+        <div class="category-image">
+          <img src="images/casaco.png" alt="Casacos">
+        </div>
+        <span>Casacos</span>
+      </button>
+
+      <button class="category" onclick="abrirProduto('fitness')">
+        <div class="category-image">
+          <img src="images/fitness.png" alt="Fitness">
+        </div>
+        <span>Fitness</span>
+      </button>
+
+    </div>
+
+    <!-- PRODUTOS EM DESTAQUE -->
+
+    <div class="section-heading">
+      <h2>Em destaque</h2>
+      <a href="#novidades">VER MAIS</a>
+    </div>
+
+    <p class="section-subtitle">
+      Peças selecionadas especialmente para você.
+    </p>
+
+    <div class="products" id="destaques">
+
+      <article class="product-card"
+        data-name="Vestido Feminino"
+        onclick="abrirProduto('vestido2')">
+
+        <div class="product-image">
+          <img src="images/vestido2.jpg" alt="Vestido feminino">
+          <span class="product-tag">DESTAQUE</span>
+        </div>
+
+        <div class="product-info">
+          <h3>Vestido Feminino</h3>
+          <p>R$ 00,00</p>
+          <small>Confira os detalhes</small>
+        </div>
+      </article>
+
+      <article class="product-card"
+        data-name="Blusa Feminina"
+        onclick="abrirProduto('blusa1')">
+
+        <div class="product-image">
+          <img src="images/blusa1.jpg" alt="Blusa feminina">
+          <span class="product-tag">POPULAR</span>
+        </div>
+
+        <div class="product-info">
+          <h3>Blusa Feminina</h3>
+          <p>R$ 00,00</p>
+          <small>Confira os detalhes</small>
+        </div>
+      </article>
+
+      <article class="product-card"
+        data-name="Saia Feminina"
+        onclick="abrirProduto('saia')">
+
+        <div class="product-image">
+          <img src="images/saia.png" alt="Saia feminina">
+          <span class="product-tag">NOVIDADE</span>
+        </div>
+
+        <div class="product-info">
+          <h3>Saia Feminina</h3>
+          <p>R$ 00,00</p>
+          <small>Confira os detalhes</small>
+        </div>
+      </article>
+
+      <article class="product-card"
+        data-name="Bolsa Feminina"
+        onclick="abrirProduto('bolsa')">
+
+        <div class="product-image">
+          <img src="images/bolsa.png" alt="Bolsa feminina">
+        </div>
+
+        <div class="product-info">
+          <h3>Bolsa Feminina</h3>
+          <p>R$ 00,00</p>
+          <small>Confira os detalhes</small>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="no-results" id="noResults">
+      <strong>Nenhum produto encontrado ♡</strong>
+      Tente pesquisar por outro nome ou categoria.
+    </div>
+
+    <!-- BENEFÍCIOS -->
+
+    <div class="section-heading">
+      <h2>Por que escolher o CLOSET?</h2>
+    </div>
+
+    <div class="benefits">
+
+      <div class="benefit-item">
+        <div class="benefit-icon">♡</div>
+        <strong>Estilo</strong>
+        <small>Peças selecionadas</small>
+      </div>
+
+      <div class="benefit-item">
+        <div class="benefit-icon">✧</div>
+        <strong>Qualidade</strong>
+        <small>Cuidado nos detalhes</small>
+      </div>
+
+      <div class="benefit-item">
+        <div class="benefit-icon">♧</div>
+        <strong>Variedade</strong>
+        <small>Opções para você</small>
+      </div>
+
+    </div>
+
+    <!-- NOVIDADES -->
+
+    <div class="section-heading" id="novidades">
+      <h2>Novidades!</h2>
+      <a href="#categorias">EXPLORAR</a>
+    </div>
+
+    <p class="section-subtitle">
+      Descubra mais possibilidades para seus looks.
+    </p>
+
+    <div class="products">
+
+      <article class="product-card"
+        data-name="Casaco Feminino"
+        onclick="abrirProduto('casaco')">
+
+        <div class="product-image">
+          <img src="images/casaco.png" alt="Casaco feminino">
+          <span class="product-tag">NOVO</span>
+        </div>
+
+        <div class="product-info">
+          <h3>Casaco Feminino</h3>
+          <p>R$ 00,00</p>
+        </div>
+      </article>
+
+      <article class="product-card"
+        data-name="Conjunto Fitness"
+        onclick="abrirProduto('fitness')">
+
+        <div class="product-image">
+          <img src="images/fitness.png" alt="Moda fitness">
+          <span class="product-tag">NOVO</span>
+        </div>
+
+        <div class="product-info">
+          <h3>Conjunto Fitness</h3>
+          <p>R$ 00,00</p>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- MENSAGEM FINAL -->
+
+    <div class="store-message">
+
+      <div class="mini-title">CLOSET DA MARI</div>
+
+      <h2>Bem-vinda ao seu novo lugar favorito!</h2>
+
+      <p>
+        Descubra peças que valorizam seu estilo,
+        explore nossas categorias e encontre
+        seu próximo look favorito.
+      </p>
+
+      <button onclick="document.getElementById('categorias').scrollIntoView({behavior:'smooth'})">
+        EXPLORAR PRODUTOS
+      </button>
+
+    </div>
+
+  </section>
+
+  <!-- RODAPÉ -->
+
+  <footer class="footer">
+    <h2>CLOSET</h2>
+
+    <p>
+      Moda, estilo e personalidade.<br>
+      Encontre seu jeito de ser você.
+    </p>
+
+    <div class="copyright">
+      © 2026 CLOSET da Mari. Todos os direitos reservados.
+    </div>
+  </footer>
+
+  <!-- BOTÃO ADICIONAR -->
+
+  <button class="add-button"
+    aria-label="Adicionar produto"
+    onclick="window.location.href='criar-produto.html'">
+    +
+  </button>
+
+  <!-- NAVEGAÇÃO INFERIOR -->
+
+  <nav class="bottom-nav">
+
+    <a href="./index.html" class="nav-item active">
+      <img src="images/home.png" alt="">
+      <span>HOME</span>
+    </a>
+
+    <a href="./favoritos.html" class="nav-item">
+      <img src="images/heart.png" alt="">
+      <span>FAVORITOS</span>
+    </a>
+
+    <a href="./pedidos.html" class="nav-item">
+      <img src="images/package.png" alt="">
+      <span>PEDIDOS</span>
+    </a>
+
+    <a href="./perfil.html" class="nav-item">
+      <img src="images/user.png" alt="">
+      <span>PERFIL</span>
+    </a>
+
+  </nav>
+
 </main>
-<footer>
-<p>© 2026 Closet da Cah — Moda feminina</p>
-<a href="contato.html">Fale conosco</a>
-</footer>
+
+<script>
+
+  // ABRIR PRODUTO
+
+  function abrirProduto(id) {
+    window.location.href = `produtos.html?id=${encodeURIComponent(id)}`;
+  }
+
+  // LER A CONTA CONECTADA
+
+  function obterUsuarioLogado() {
+    try {
+      return JSON.parse(localStorage.getItem("usuarioLogado"));
+    } catch (erro) {
+      return null;
+    }
+  }
+
+  // ATUALIZAR FOTO DE PERFIL NO CABEÇALHO
+
+  function atualizarFotoCabecalho() {
+    const usuario = obterUsuarioLogado();
+
+    const areaFoto = document.getElementById("headerProfile");
+    const imagem = document.getElementById("headerProfilePhoto");
+
+    if (!areaFoto || !imagem) return;
+
+    if (usuario) {
+      let foto = usuario.fotoPerfil;
+
+      // Busca a foto também no cadastro do usuário
+      if (!foto && usuario.id) {
+        try {
+          const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+          const cadastro = usuarios.find(u => String(u.id) === String(usuario.id));
+
+          if (cadastro && cadastro.fotoPerfil) {
+            foto = cadastro.fotoPerfil;
+          }
+        } catch (erro) {
+          console.error("Erro ao buscar foto do usuário:", erro);
+        }
+      }
+
+      imagem.src = foto || "images/user.png";
+      areaFoto.style.display = "block";
+
+    } else {
+      areaFoto.style.display = "none";
+      imagem.src = "images/user.png";
+    }
+  }
+
+  // SAUDAÇÃO DE ACORDO COM O HORÁRIO
+
+  function obterSaudacao() {
+    const hora = new Date().getHours();
+
+    if (hora >= 5 && hora < 12) {
+      return "Bom dia";
+    }
+
+    if (hora >= 12 && hora < 18) {
+      return "Boa tarde";
+    }
+
+    return "Boa noite";
+  }
+
+  // PERSONALIZAR BOAS-VINDAS
+
+  function atualizarBoasVindas() {
+    const usuario = obterUsuarioLogado();
+
+    const label = document.getElementById("welcomeLabel");
+    const title = document.getElementById("welcomeTitle");
+    const message = document.getElementById("welcomeMessage");
+    const actions = document.getElementById("welcomeActions");
+
+    if (usuario && usuario.nome) {
+      const primeiroNome = usuario.nome.trim().split(" ")[0];
+
+      label.textContent = "QUE BOM TER VOCÊ AQUI!";
+      title.textContent = `${obterSaudacao()}, ${primeiroNome}! ♡`;
+
+      message.textContent =
+        "Seja bem-vinda de volta! Explore nossas novidades e encontre peças que combinam com você.";
+
+      actions.innerHTML = `
+        <a href="perfil.html">MEU PERFIL</a>
+        <button class="logout-button" onclick="sairDaConta()">SAIR DA CONTA</button>
+      `;
+
+    } else {
+      label.textContent = "BEM-VINDA AO CLOSET";
+      title.textContent = "Olá! Seja bem-vinda ♡";
+
+      message.textContent =
+        "Estamos felizes em ter você aqui. Entre na sua conta para ter uma experiência personalizada!";
+
+      actions.innerHTML = `
+        <a href="perfil.html">ENTRAR NA CONTA</a>
+        <a href="cadastro.html" class="logout-button">CADASTRAR</a>
+      `;
+    }
+  }
+
+  // ENCERRAR SESSÃO
+
+  function sairDaConta() {
+    const confirmar = confirm("Deseja realmente sair da sua conta?");
+
+    if (confirmar) {
+      localStorage.removeItem("usuarioLogado");
+
+      alert("Você saiu da sua conta.");
+
+      atualizarBoasVindas();
+      atualizarFotoCabecalho();
+    }
+  }
+
+  // NOTIFICAÇÕES
+
+  function mostrarNotificacao() {
+    const caixa = document.getElementById("notificationMessage");
+    const usuario = obterUsuarioLogado();
+
+    if (usuario && usuario.nome) {
+      caixa.textContent =
+        "♡ Olá! Fique de olho nas novidades do CLOSET. Estamos sempre preparando novas opções para você!";
+    } else {
+      caixa.textContent =
+        "♡ Entre ou cadastre-se para aproveitar uma experiência personalizada no CLOSET!";
+    }
+
+    caixa.classList.add("show");
+
+    caixa.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest"
+    });
+  }
+
+  // PESQUISAR PRODUTOS
+
+  const searchInput = document.getElementById("searchInput");
+  const produtos = document.querySelectorAll(".product-card");
+  const noResults = document.getElementById("noResults");
+
+  searchInput.addEventListener("input", function() {
+    const termo = this.value
+      .toLowerCase()
+      .trim()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+
+    let encontrados = 0;
+
+    produtos.forEach(function(produto) {
+      const nome = (produto.dataset.name || "")
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+
+      if (nome.includes(termo)) {
+        produto.style.display = "";
+        encontrados++;
+      } else {
+        produto.style.display = "none";
+      }
+    });
+
+    noResults.style.display =
+      encontrados === 0 ? "block" : "none";
+  });
+
+  // INICIAR PÁGINA
+
+  atualizarBoasVindas();
+  atualizarFotoCabecalho();
+
+</script>
+
 </body>
 </html>

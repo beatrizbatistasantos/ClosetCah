@@ -1,103 +1,1588 @@
 
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CLOSET da Mari - Perfil</title>
 
-    <title>Perfil | Closet</title>
+  <style>
+    :root {
+      --pink: #ed777b;
+      --pink-dark: #d95f65;
+      --pink-light: #fff1f1;
+      --pink-soft: #f8e3e4;
+      --text: #242424;
+      --muted: #777;
+      --border: #eeeeee;
+      --white: #fff;
+    }
 
-    <link rel="stylesheet" href="style.css">
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100dvh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f7eeee;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+    }
+
+    button, input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .mobile {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      height: 100dvh;
+      min-height: 650px;
+      background: var(--white);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      margin: 0 auto;
+      box-shadow: 0 0 35px #00000012;
+    }
+
+    /* CABEÇALHO */
+
+    .header {
+      height: 75px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 22px;
+      border-bottom: 1px solid #f5eeee;
+    }
+
+    .header-left {
+      width: 42px;
+      height: 42px;
+      border: none;
+      background: var(--pink-light);
+      color: var(--pink-dark);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: .25s;
+    }
+
+    .header-left:hover {
+      background: var(--pink-soft);
+      transform: translateX(-3px);
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .icon-button {
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--border);
+      background: #fff;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: .25s;
+    }
+
+    .icon-button:hover {
+      background: var(--pink-light);
+      border-color: #f3c4c6;
+      transform: translateY(-3px);
+    }
+
+    .icon-button img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+    }
+
+    /* CONTEÚDO */
+
+    .content {
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      padding: 30px 22px 115px;
+      scrollbar-width: none;
+    }
+
+    .content::-webkit-scrollbar {
+      display: none;
+    }
+
+    .login-container {
+      width: 100%;
+      max-width: 390px;
+      margin: 0 auto;
+    }
+
+    .profile-view {
+      display: none;
+      width: 100%;
+      max-width: 650px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    /* LOGO */
+
+    .brand {
+      width: 125px;
+      height: 125px;
+      margin: 0 auto 18px;
+      border-radius: 50%;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      box-shadow: 0 8px 20px #00000018;
+      transition: .3s;
+    }
+
+    .brand:hover {
+      transform: scale(1.05) rotate(-3deg);
+    }
+
+    .brand img {
+      width: 82%;
+      height: 82%;
+      object-fit: contain;
+    }
+
+    /* TÍTULOS */
+
+    h1 {
+      font-size: 29px;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 9px;
+      letter-spacing: -.7px;
+    }
+
+    .description {
+      font-size: 13px;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+
+    .highlight {
+      color: var(--pink-dark);
+      font-weight: 600;
+    }
+
+    /* LOGIN */
+
+    .form-group {
+      margin-bottom: 19px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 9px;
+    }
+
+    .form-group input {
+      width: 100%;
+      height: 49px;
+      padding: 0 16px;
+      border: 1px solid #e9e3e3;
+      border-radius: 13px;
+      background: #faf8f8;
+      outline: none;
+      font-size: 14px;
+      color: var(--text);
+      transition: .25s;
+    }
+
+    .form-group input::placeholder {
+      color: #aaa;
+    }
+
+    .form-group input:focus {
+      background: #fff;
+      border-color: var(--pink);
+      box-shadow: 0 0 0 3px #ed777b20;
+    }
+
+    .forgot {
+      display: block;
+      width: fit-content;
+      margin: -5px 2px 23px auto;
+      color: var(--pink-dark);
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: .2s;
+    }
+
+    .forgot:hover {
+      color: #b9474d;
+      text-decoration: underline;
+    }
+
+    .register {
+      height: 49px;
+      width: 100%;
+      border: none;
+      border-radius: 13px;
+      background: linear-gradient(135deg, var(--pink), var(--pink-dark));
+      box-shadow: 0 5px 13px #ed777b40;
+      font-size: 14px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 27px;
+      transition: .25s;
+    }
+
+    .register:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 18px #ed777b55;
+    }
+
+    .register:active {
+      transform: scale(.98);
+    }
+
+    /* LOGIN SOCIAL */
+
+    .separator {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 5px 19px;
+      font-size: 12px;
+      color: #999;
+    }
+
+    .separator::before,
+    .separator::after {
+      content: "";
+      height: 1px;
+      background: #e9e3e3;
+      flex: 1;
+    }
+
+    .social-login {
+      display: flex;
+      justify-content: center;
+      gap: 17px;
+    }
+
+    .social-button {
+      width: 65px;
+      height: 48px;
+      background: #faf8f8;
+      border: 1px solid #eee7e7;
+      border-radius: 13px;
+      box-shadow: 0 2px 5px #00000008;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: .25s;
+    }
+
+    .social-button:hover {
+      background: var(--pink-light);
+      border-color: #f2c4c6;
+      transform: translateY(-4px);
+    }
+
+    .social-button svg {
+      width: 29px;
+      height: 29px;
+    }
+
+    .register-text {
+      text-align: center;
+      margin-top: 24px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .register-text a {
+      color: var(--pink-dark);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .register-text a:hover {
+      text-decoration: underline;
+    }
+
+    /* PERFIL - CABEÇALHO */
+
+    .profile-heading {
+      margin-bottom: 24px;
+    }
+
+    .profile-heading h1 {
+      text-align: left;
+      font-size: 26px;
+      margin-bottom: 6px;
+    }
+
+    .profile-heading p {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    /* CARTÃO PRINCIPAL */
+
+    .profile-banner {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 25px;
+      border-radius: 22px;
+      background: linear-gradient(125deg, #fff0f0, #f8dfe1);
+      border: 1px solid #f6dddd;
+      margin-bottom: 25px;
+      overflow: hidden;
+    }
+
+    .profile-banner::after {
+      content: "♡";
+      position: absolute;
+      right: 20px;
+      bottom: -45px;
+      font-size: 150px;
+      color: #ffffff80;
+      pointer-events: none;
+    }
+
+    .profile-photo-container {
+      position: relative;
+      width: 112px;
+      height: 112px;
+      flex-shrink: 0;
+      z-index: 1;
+    }
+
+    .profile-photo {
+      width: 112px;
+      height: 112px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid white;
+      background: white;
+      box-shadow: 0 5px 16px #00000012;
+    }
+
+    .change-photo {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 36px;
+      height: 36px;
+      border: 3px solid white;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--pink), var(--pink-dark));
+      color: white;
+      font-size: 17px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 3px 10px #ed777b50;
+      transition: .25s;
+    }
+
+    .change-photo:hover {
+      transform: scale(1.1);
+    }
+
+    .photo-input {
+      display: none;
+    }
+
+    .profile-banner-info {
+      min-width: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .welcome-label {
+      display: inline-block;
+      background: white;
+      color: var(--pink-dark);
+      padding: 6px 11px;
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      margin-bottom: 10px;
+    }
+
+    .profile-banner-info h2 {
+      font-size: 23px;
+      margin-bottom: 7px;
+      overflow-wrap: anywhere;
+    }
+
+    .profile-banner-info p {
+      color: #95666a;
+      font-size: 12px;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+    }
+
+    /* ATALHOS */
+
+    .section-title {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .shortcut-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 13px;
+      margin-bottom: 28px;
+    }
+
+    .shortcut-card {
+      min-height: 125px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      gap: 11px;
+      padding: 15px 8px;
+      background: white;
+      border: 1px solid #f0e6e6;
+      border-radius: 17px;
+      text-decoration: none;
+      transition: .25s;
+      box-shadow: 0 3px 12px #00000005;
+    }
+
+    .shortcut-card:hover {
+      transform: translateY(-4px);
+      background: var(--pink-light);
+      border-color: #f1c5c7;
+      box-shadow: 0 7px 16px #ed777b15;
+    }
+
+    .shortcut-icon {
+      width: 47px;
+      height: 47px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 15px;
+      background: var(--pink-light);
+      color: var(--pink-dark);
+      font-size: 24px;
+    }
+
+    .shortcut-card strong {
+      font-size: 12px;
+    }
+
+    .shortcut-card span:last-child {
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    /* INFORMAÇÕES DA CONTA */
+
+    .account-section {
+      background: white;
+      border: 1px solid #f0e6e6;
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 23px;
+      box-shadow: 0 3px 12px #00000005;
+    }
+
+    .account-section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .account-section-header h2 {
+      font-size: 16px;
+    }
+
+    .account-status {
+      background: #e9f8ed;
+      color: #388b50;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 6px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .account-row {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      padding: 14px 0;
+      border-top: 1px solid #f4eeee;
+    }
+
+    .account-icon {
+      width: 39px;
+      height: 39px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--pink-light);
+      color: var(--pink-dark);
+      border-radius: 12px;
+      font-size: 17px;
+    }
+
+    .account-data {
+      min-width: 0;
+    }
+
+    .account-data small {
+      display: block;
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 5px;
+    }
+
+    .account-data strong {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      overflow-wrap: anywhere;
+    }
+
+    /* MENSAGEM DA LOJA */
+
+    .store-message {
+      position: relative;
+      padding: 22px;
+      border-radius: 18px;
+      background: linear-gradient(120deg, #ed777b, #d95f65);
+      color: white;
+      margin-bottom: 23px;
+      overflow: hidden;
+    }
+
+    .store-message::after {
+      content: "✿";
+      position: absolute;
+      right: 15px;
+      bottom: -28px;
+      font-size: 110px;
+      color: #ffffff25;
+    }
+
+    .store-message h2 {
+      font-size: 17px;
+      margin-bottom: 9px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .store-message p {
+      font-size: 12px;
+      line-height: 1.7;
+      max-width: 420px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .store-link {
+      display: inline-flex;
+      margin-top: 15px;
+      padding: 10px 15px;
+      border-radius: 10px;
+      background: white;
+      color: var(--pink-dark);
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
+      transition: .2s;
+    }
+
+    .store-link:hover {
+      transform: translateY(-2px);
+    }
+
+    /* AÇÕES DO PERFIL */
+
+    .profile-message {
+      font-size: 12px;
+      margin: 0 0 13px;
+      color: var(--pink-dark);
+      min-height: 15px;
+      text-align: center;
+    }
+
+    .photo-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .profile-button {
+      width: 100%;
+      min-height: 46px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--pink), var(--pink-dark));
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: .25s;
+      box-shadow: 0 4px 12px #ed777b30;
+      padding: 10px;
+    }
+
+    .profile-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 7px 15px #ed777b45;
+    }
+
+    .remove-photo {
+      background: white;
+      color: var(--pink-dark);
+      border: 1px solid #f1c8ca;
+      box-shadow: none;
+    }
+
+    .logout-button {
+      background: #f5f5f5;
+      color: #777;
+      box-shadow: none;
+      margin-bottom: 5px;
+    }
+
+    .logout-button:hover {
+      background: #eeeeee;
+      box-shadow: none;
+    }
+
+    /* NAVEGAÇÃO INFERIOR */
+
+    .bottom-nav {
+      position: absolute;
+      height: 82px;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border-top: 1px solid #f1e8e8;
+      border-radius: 27px 27px 0 0;
+      background: #fff;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      align-items: center;
+      padding: 9px 4px 5px;
+      z-index: 2;
+      box-shadow: 0 -5px 20px #00000008;
+    }
+
+    .nav-item {
+      height: 58px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 4px;
+      border: none;
+      background: transparent;
+      color: #888;
+      font-size: 10px;
+      font-weight: 600;
+      white-space: nowrap;
+      text-decoration: none;
+      transition: .25s;
+    }
+
+    .nav-item img {
+      width: 27px;
+      height: 27px;
+      object-fit: contain;
+      transition: .25s;
+    }
+
+    .nav-item:hover {
+      color: var(--pink-dark);
+      transform: translateY(-3px);
+    }
+
+    .nav-item:hover img {
+      transform: scale(1.12);
+    }
+
+    .nav-item.active {
+      color: var(--pink-dark);
+    }
+
+    /* BOTÃO FLUTUANTE */
+
+    .add-button {
+      position: absolute;
+      z-index: 3;
+      width: 43px;
+      height: 43px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--pink), var(--pink-dark));
+      border: 3px solid white;
+      color: white;
+      font-size: 29px;
+      font-weight: 300;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      left: 50%;
+      bottom: 62px;
+      transform: translateX(-50%);
+      box-shadow: 0 4px 12px #ed777b55;
+      transition: .25s;
+    }
+
+    .add-button:hover {
+      transform: translateX(-50%) scale(1.12);
+      box-shadow: 0 6px 17px #ed777b70;
+    }
+
+    /* RESPONSIVIDADE */
+
+    @media (max-width: 600px) {
+      body {
+        background: #fff;
+      }
+
+      .mobile {
+        width: 100%;
+        max-width: none;
+        height: 100dvh;
+        min-height: 0;
+        box-shadow: none;
+      }
+
+      .content {
+        padding: 24px 17px 115px;
+      }
+
+      .profile-banner {
+        gap: 14px;
+        padding: 19px 15px;
+      }
+
+      .profile-photo-container,
+      .profile-photo {
+        width: 88px;
+        height: 88px;
+      }
+
+      .profile-banner-info h2 {
+        font-size: 19px;
+      }
+
+      .shortcut-grid {
+        gap: 8px;
+      }
+
+      .shortcut-card {
+        min-height: 115px;
+        padding: 12px 5px;
+      }
+
+      .shortcut-card strong {
+        font-size: 11px;
+      }
+
+      .account-section {
+        padding: 16px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .profile-banner {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .profile-banner-info h2 {
+        font-size: 20px;
+      }
+
+      .shortcut-card {
+        min-height: 105px;
+      }
+
+      .shortcut-icon {
+        width: 40px;
+        height: 40px;
+      }
+
+      .photo-actions {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-height: 720px) {
+      .content {
+        padding-top: 12px;
+      }
+
+      .brand {
+        width: 95px;
+        height: 95px;
+        margin-bottom: 12px;
+      }
+
+      h1 {
+        font-size: 25px;
+        margin-bottom: 6px;
+      }
+
+      .description {
+        margin-bottom: 17px;
+      }
+
+      .form-group {
+        margin-bottom: 13px;
+      }
+
+      .form-group input {
+        height: 44px;
+      }
+
+      .register {
+        height: 45px;
+        margin-bottom: 18px;
+      }
+
+      .register-text {
+        margin-top: 16px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        transition: none !important;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-    <!-- Mensagem para computadores -->
-    <aside class="desktop-message">
-        <div>
-            <h1>Closet</h1>
+  <main class="mobile">
 
-            <p>
-                Esta interface foi criada para a versão mobile.
-                Reduza a largura da janela ou abra o site em um
-                celular para visualizar as telas do aplicativo.
-            </p>
+    <!-- CABEÇALHO -->
+
+    <header class="header">
+
+      <button class="header-left" aria-label="Voltar"
+              onclick="history.back()">
+
+        <svg width="25" height="25" viewBox="0 0 36 36"
+             fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M31 18H5M17 7L6 18L17 29"/>
+        </svg>
+
+      </button>
+
+      <div class="header-actions">
+
+        <button class="icon-button" aria-label="Sacola"
+                onclick="window.location.href='pedidos.html'">
+          <img src="images/bag.png" alt="Sacola">
+        </button>
+
+        <button class="icon-button" aria-label="Notificações"
+                onclick="alert('Você não possui novas notificações.')">
+          <img src="images/bell.png" alt="Notificações">
+        </button>
+
+      </div>
+
+    </header>
+
+    <!-- CONTEÚDO -->
+
+    <section class="content">
+
+      <!-- ÁREA DE LOGIN -->
+
+      <div class="login-container" id="loginContainer">
+
+        <div class="brand" aria-label="Closet">
+          <img src="images/logo.png" alt="Logo CLOSET da Mari">
         </div>
-    </aside>
 
-    <!-- Aplicativo mobile -->
-    <main class="mobile-app">
+        <h1>Bem-vinda de volta!</h1>
 
-        <div class="phone-content">
+        <p class="description">
+          Entre na sua conta para continuar explorando
+          o universo da <span class="highlight">CLOSET da Mari.</span>
+        </p>
 
-            <!-- Cabeçalho -->
-            <header class="topbar">
-                <span class="spacer"></span>
+        <form id="loginForm">
 
-                <button class="icon-button" aria-label="Sacola">
-                    <img src="images/bag.png">
-                </button>
+          <div class="form-group">
+            <label for="email">Email</label>
 
-                <button class="icon-button" aria-label="Notificações">
-                    <img src="images/bell.png">
-                </button>
-            </header>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Digite seu email"
+              autocomplete="email"
+              required
+            >
+          </div>
 
-            <!-- Título do perfil -->
-            <h1 class="page-title">Meu Perfil</h1>
+          <div class="form-group">
+            <label for="senha">Senha</label>
 
-            <!-- Conteúdo do perfil -->
-            <section
-                class="profile-content"
-                style="text-align: center; margin: 70px 20px; color: #777;"
+            <input
+              type="password"
+              id="senha"
+              name="senha"
+              placeholder="Digite sua senha"
+              autocomplete="current-password"
+              required
+            >
+          </div>
+
+          <a href="#" class="forgot"
+             onclick="alert('Integre aqui a recuperação de senha.'); return false;">
+            Esqueceu sua senha?
+          </a>
+
+          <button class="register" type="submit">
+            Entrar na minha conta
+          </button>
+
+        </form>
+
+        <!-- LOGIN SOCIAL -->
+
+        <div class="separator">
+          <span>ou entre com</span>
+        </div>
+
+        <div class="social-login">
+
+          <button class="social-button" type="button"
+                  aria-label="Entrar com Google"
+                  onclick="alert('Integre aqui o login com Google.')">
+
+            <svg viewBox="0 0 48 48">
+              <path fill="#4285F4"
+                d="M43.6 24.5c0-1.4-.1-2.8-.4-4.1H24v7.8h11a9.4 9.4 0 0 1-4.1 6.2v5.1h6.6c3.9-3.6 6.1-8.8 6.1-15Z"/>
+              <path fill="#34A853"
+                d="M24 44c5.5 0 10.1-1.8 13.5-4.9l-6.6-5.1c-1.8 1.2-4 2-6.9 2-5.3 0-9.8-3.6-11.4-8.4H5.8v5.3A20 20 0 0 0 24 44Z"/>
+              <path fill="#FBBC05"
+                d="M12.6 27.6a12 12 0 0 1 0-7.2v-5.3H5.8a20 20 0 0 0 0 17.8l6.8-5.3Z"/>
+              <path fill="#EA4335"
+                d="M24 12c3 0 5.7 1 7.8 3.1l5.9-5.9C34.1 5.8 29.5 4 24 4A20 20 0 0 0 5.8 15.1l6.8 5.3C14.2 15.6 18.7 12 24 12Z"/>
+            </svg>
+
+          </button>
+
+          <button class="social-button" type="button"
+                  aria-label="Entrar com Instagram"
+                  onclick="alert('Integre aqui o login com Instagram.')">
+
+            <svg viewBox="0 0 48 48">
+              <defs>
+                <radialGradient id="insta" cx="25%" cy="100%" r="110%">
+                  <stop offset="0%" stop-color="#FFD776"/>
+                  <stop offset="35%" stop-color="#FF4D4D"/>
+                  <stop offset="65%" stop-color="#D6249F"/>
+                  <stop offset="100%" stop-color="#285AEB"/>
+                </radialGradient>
+              </defs>
+
+              <rect x="4" y="4" width="40" height="40"
+                    rx="12" fill="url(#insta)"/>
+
+              <rect x="12" y="12" width="24" height="24"
+                    rx="7" fill="none" stroke="white" stroke-width="3"/>
+
+              <circle cx="24" cy="24" r="6"
+                      fill="none" stroke="white" stroke-width="3"/>
+
+              <circle cx="32" cy="16" r="2" fill="white"/>
+            </svg>
+
+          </button>
+
+        </div>
+
+        <p class="register-text">
+          Ainda não tem uma conta?
+          <a href="cadastro.html">Cadastre-se!</a>
+        </p>
+
+      </div>
+
+      <!-- ÁREA DO PERFIL LOGADO -->
+
+      <div class="profile-view" id="profileView">
+
+        <!-- TÍTULO -->
+
+        <div class="profile-heading">
+          <h1>Minha conta</h1>
+          <p>Gerencie suas informações e acompanhe sua experiência na loja.</p>
+        </div>
+
+        <!-- CARTÃO DE APRESENTAÇÃO -->
+
+        <div class="profile-banner">
+
+          <div class="profile-photo-container">
+
+            <img
+              src="images/user.png"
+              alt="Foto de perfil"
+              class="profile-photo"
+              id="profilePhoto"
             >
 
-                <div style="font-size: 56px;" aria-hidden="true">
-                    ☉
-                </div>
-
-                <p>Área de perfil em construção.</p>
-
-            </section>
-
-            <!-- Navegação inferior -->
-            <nav class="bottom-nav" aria-label="Navegação principal">
-
-                <a class="active" href="index.html">
-                    <img src="images/home.png">
-                    <small>HOME</small>
-                </a>
-
-                <a href="favoritos.html">
-                    <span class="nav-icon">♡</span>
-                    <small>FAVORITOS</small>
-                </a>
-
-                <a href="pedidos.html">
-                    <img src="images/package.png">
-                    <small>PEDIDOS</small>
-                </a>
-
-                <a href="perfil.html">
-                    <img src="images/user.png">
-                    <small>PERFIL</small>
-                </a>
-
-            </nav>
-
-            <!-- Botão flutuante -->
             <button
-                class="add-button"
-                aria-label="Adicionar aos favoritos"
-                onclick="window.location.href='favoritos.html'"
+              class="change-photo"
+              type="button"
+              onclick="document.getElementById('photoInput').click()"
+              aria-label="Trocar foto"
             >
-                +
+              ✎
             </button>
 
+            <input
+              type="file"
+              id="photoInput"
+              class="photo-input"
+              accept="image/png,image/jpeg,image/webp"
+            >
+
+          </div>
+
+          <div class="profile-banner-info">
+
+            <span class="welcome-label">✦ CONTA CLOSET</span>
+
+            <h2 id="profileName">Olá!</h2>
+
+            <p id="profileEmail"></p>
+
+          </div>
+
         </div>
 
-    </main>
+        <!-- ATALHOS -->
+
+        <h2 class="section-title">Acesse sua área</h2>
+
+        <div class="shortcut-grid">
+
+          <a href="favoritos.html" class="shortcut-card">
+
+            <span class="shortcut-icon">♡</span>
+
+            <strong>Meus favoritos</strong>
+
+            <span>Seus looks salvos</span>
+
+          </a>
+
+          <a href="pedidos.html" class="shortcut-card">
+
+            <span class="shortcut-icon">▣</span>
+
+            <strong>Meus pedidos</strong>
+
+            <span>Acompanhe suas compras</span>
+
+          </a>
+
+          <a href="index.html" class="shortcut-card">
+
+            <span class="shortcut-icon">✧</span>
+
+            <strong>Explorar loja</strong>
+
+            <span>Encontre novidades</span>
+
+          </a>
+
+        </div>
+
+        <!-- DADOS DA CONTA -->
+
+        <div class="account-section">
+
+          <div class="account-section-header">
+
+            <h2>Informações da conta</h2>
+
+            <span class="account-status">● ATIVA</span>
+
+          </div>
+
+          <div class="account-row">
+
+            <span class="account-icon">♙</span>
+
+            <div class="account-data">
+
+              <small>Nome completo</small>
+
+              <strong id="accountName">Não informado</strong>
+
+            </div>
+
+          </div>
+
+          <div class="account-row">
+
+            <span class="account-icon">✉</span>
+
+            <div class="account-data">
+
+              <small>Email cadastrado</small>
+
+              <strong id="accountEmail">Não informado</strong>
+
+            </div>
+
+          </div>
+
+          <div class="account-row">
+
+            <span class="account-icon">♡</span>
+
+            <div class="account-data">
+
+              <small>Tipo de conta</small>
+
+              <strong>Cliente CLOSET da Mari</strong>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- MENSAGEM DA LOJA -->
+
+        <div class="store-message">
+
+          <h2>Seu estilo, suas escolhas! ♡</h2>
+
+          <p>
+            Estamos felizes em ter você por aqui.
+            Explore nossas peças, salve seus favoritos
+            e encontre combinações que tenham tudo a ver com você.
+          </p>
+
+          <a href="index.html" class="store-link">
+            EXPLORAR COLEÇÃO →
+          </a>
+
+        </div>
+
+        <!-- ALTERAÇÃO DE FOTO -->
+
+        <p class="profile-message" id="profileMessage"></p>
+
+        <div class="photo-actions">
+
+          <button
+            class="profile-button"
+            type="button"
+            onclick="salvarFoto()"
+          >
+            Salvar foto de perfil
+          </button>
+
+          <button
+            class="profile-button remove-photo"
+            type="button"
+            onclick="removerFoto()"
+          >
+            Remover foto
+          </button>
+
+        </div>
+
+        <button
+          class="profile-button logout-button"
+          type="button"
+          onclick="sairDaConta()"
+        >
+          Sair da conta
+        </button>
+
+      </div>
+
+    </section>
+
+    <!-- BOTÃO FLUTUANTE -->
+
+    <button class="add-button" aria-label="Adicionar"
+            onclick="window.location.href='index.html'">
+      +
+    </button>
+
+    <!-- NAVEGAÇÃO INFERIOR -->
+
+    <nav class="bottom-nav">
+
+      <a href="./index.html" class="nav-item">
+        <img src="images/home.png" alt="Home">
+        <span>HOME</span>
+      </a>
+
+      <a href="./favoritos.html" class="nav-item">
+        <img src="images/heart.png" alt="Favoritos">
+        <span>FAVORITOS</span>
+      </a>
+
+      <a href="./pedidos.html" class="nav-item">
+        <img src="images/package.png" alt="Pedidos">
+        <span>PEDIDOS</span>
+      </a>
+
+      <a href="./perfil.html" class="nav-item active">
+        <img src="images/user.png" alt="Perfil">
+        <span>PERFIL</span>
+      </a>
+
+    </nav>
+
+  </main>
+
+  <script>
+
+    // ELEMENTOS PRINCIPAIS
+
+    const loginForm = document.getElementById("loginForm");
+    const loginContainer = document.getElementById("loginContainer");
+    const profileView = document.getElementById("profileView");
+
+    let fotoSelecionada = null;
+
+    // RECUPERAR USUÁRIO CONECTADO
+
+    function obterUsuarioLogado() {
+      return JSON.parse(localStorage.getItem("usuarioLogado")) || null;
+    }
+
+    // CARREGAR PERFIL OU LOGIN
+
+    function carregarPerfil() {
+
+      const usuario = obterUsuarioLogado();
+
+      if (usuario) {
+
+        loginContainer.style.display = "none";
+        profileView.style.display = "block";
+
+        document.getElementById("profileName").textContent =
+          "Olá, " + usuario.nome.split(" ")[0] + "!";
+
+        document.getElementById("profileEmail").textContent =
+          usuario.email;
+
+        document.getElementById("accountName").textContent =
+          usuario.nome;
+
+        document.getElementById("accountEmail").textContent =
+          usuario.email;
+
+        document.getElementById("profilePhoto").src =
+          usuario.fotoPerfil || "images/user.png";
+
+      } else {
+
+        loginContainer.style.display = "block";
+        profileView.style.display = "none";
+
+      }
+
+    }
+
+    // LOGIN
+
+    loginForm.addEventListener("submit", function(e) {
+
+      e.preventDefault();
+
+      const email = document.getElementById("email").value.trim().toLowerCase();
+      const senha = document.getElementById("senha").value;
+
+      const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+
+      const usuario = usuarios.find(u =>
+        u.email === email && u.senha === senha
+      );
+
+      if (!usuario) {
+        alert("Email ou senha incorretos!");
+        return;
+      }
+
+      localStorage.setItem("usuarioLogado", JSON.stringify({
+        id: usuario.id,
+        nome: usuario.nome,
+        email: usuario.email,
+        fotoPerfil: usuario.fotoPerfil || null
+      }));
+
+      alert("Bem-vinda, " + usuario.nome + "!");
+
+      window.location.href = "index.html";
+
+    });
+
+    // SELECIONAR FOTO
+
+    document.getElementById("photoInput").addEventListener("change", function(e) {
+
+      const arquivo = e.target.files[0];
+
+      if (!arquivo) return;
+
+      if (!arquivo.type.startsWith("image/")) {
+        alert("Selecione um arquivo de imagem válido.");
+        this.value = "";
+        return;
+      }
+
+      if (arquivo.size > 5 * 1024 * 1024) {
+        alert("A imagem deve ter no máximo 5 MB.");
+        this.value = "";
+        return;
+      }
+
+      const leitor = new FileReader();
+
+      leitor.onload = function(event) {
+
+        const imagem = new Image();
+
+        imagem.onload = function() {
+
+          const canvas = document.createElement("canvas");
+          const tamanhoMaximo = 400;
+
+          let largura = imagem.width;
+          let altura = imagem.height;
+
+          if (largura > altura) {
+
+            if (largura > tamanhoMaximo) {
+              altura *= tamanhoMaximo / largura;
+              largura = tamanhoMaximo;
+            }
+
+          } else {
+
+            if (altura > tamanhoMaximo) {
+              largura *= tamanhoMaximo / altura;
+              altura = tamanhoMaximo;
+            }
+
+          }
+
+          canvas.width = largura;
+          canvas.height = altura;
+
+          const contexto = canvas.getContext("2d");
+
+          contexto.drawImage(imagem, 0, 0, largura, altura);
+
+          fotoSelecionada = canvas.toDataURL("image/jpeg", 0.8);
+
+          document.getElementById("profilePhoto").src = fotoSelecionada;
+
+          document.getElementById("profileMessage").textContent =
+            "Prévia carregada! Clique em salvar para confirmar.";
+
+        };
+
+        imagem.onerror = function() {
+          alert("Não foi possível carregar essa imagem.");
+        };
+
+        imagem.src = event.target.result;
+
+      };
+
+      leitor.onerror = function() {
+        alert("Erro ao ler o arquivo.");
+      };
+
+      leitor.readAsDataURL(arquivo);
+
+    });
+
+    // SALVAR FOTO
+
+    function salvarFoto() {
+
+      const usuarioLogado = obterUsuarioLogado();
+
+      if (!usuarioLogado) {
+        alert("Você precisa entrar na sua conta.");
+        return;
+      }
+
+      if (!fotoSelecionada) {
+        alert("Escolha uma foto antes de salvar.");
+        return;
+      }
+
+      const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+
+      const indice = usuarios.findIndex(u =>
+        u.id === usuarioLogado.id
+      );
+
+      if (indice === -1) {
+        alert("Não foi possível encontrar sua conta.");
+        return;
+      }
+
+      usuarios[indice].fotoPerfil = fotoSelecionada;
+
+      try {
+
+        localStorage.setItem("usuarios", JSON.stringify(usuarios));
+
+        usuarioLogado.fotoPerfil = fotoSelecionada;
+
+        localStorage.setItem("usuarioLogado", JSON.stringify(usuarioLogado));
+
+        fotoSelecionada = null;
+
+        document.getElementById("photoInput").value = "";
+
+        document.getElementById("profileMessage").textContent =
+          "Foto de perfil salva com sucesso!";
+
+      } catch (erro) {
+
+        alert("Não foi possível salvar a imagem. Tente escolher uma foto menor.");
+
+      }
+
+    }
+
+    // REMOVER FOTO
+
+    function removerFoto() {
+
+      const usuarioLogado = obterUsuarioLogado();
+
+      if (!usuarioLogado) return;
+
+      if (!confirm("Deseja realmente remover sua foto de perfil?")) {
+        return;
+      }
+
+      const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+
+      const indice = usuarios.findIndex(u =>
+        u.id === usuarioLogado.id
+      );
+
+      if (indice === -1) {
+        alert("Não foi possível encontrar sua conta.");
+        return;
+      }
+
+      delete usuarios[indice].fotoPerfil;
+
+      try {
+
+        localStorage.setItem("usuarios", JSON.stringify(usuarios));
+
+        delete usuarioLogado.fotoPerfil;
+
+        localStorage.setItem("usuarioLogado", JSON.stringify(usuarioLogado));
+
+        fotoSelecionada = null;
+
+        document.getElementById("photoInput").value = "";
+
+        document.getElementById("profilePhoto").src = "images/user.png";
+
+        document.getElementById("profileMessage").textContent =
+          "Foto de perfil removida com sucesso!";
+
+      } catch (erro) {
+
+        alert("Não foi possível remover a foto. Tente novamente.");
+
+      }
+
+    }
+
+    // SAIR DA CONTA
+
+    function sairDaConta() {
+
+      if (!confirm("Deseja realmente sair da sua conta?")) {
+        return;
+      }
+
+      localStorage.removeItem("usuarioLogado");
+
+      window.location.reload();
+
+    }
+
+    // VERIFICAR SESSÃO AO ABRIR A PÁGINA
+
+    carregarPerfil();
+
+  </script>
 
 </body>
 </html>

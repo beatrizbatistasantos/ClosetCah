@@ -1,117 +1,1064 @@
 
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLOSET da Mari - Seus Pedidos</title>
 
-    <title>Pedidos | Closet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <link rel="stylesheet" href="style.css">
+        :root {
+            --pink: #ed777b;
+            --pink-dark: #d95f65;
+            --pink-light: #fff1f1;
+            --pink-soft: #f8e3e4;
+            --text: #242424;
+            --muted: #777;
+            --border: #eeeeee;
+            --white: #fff;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #f3f3f3;
+            color: var(--text);
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            justify-content: center;
+        }
+
+        button, a {
+            font: inherit;
+            color: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* CONTAINER PRINCIPAL */
+
+        .phone {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            height: 100dvh;
+            min-height: 600px;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 0 25px rgba(0,0,0,.07);
+        }
+
+        /* FAIXA PROMOCIONAL */
+
+        .promo-bar {
+            min-height: 30px;
+            padding: 8px;
+            background: var(--pink);
+            color: white;
+            text-align: center;
+            font-size: 10px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            flex-shrink: 0;
+        }
+
+        /* CABEÇALHO */
+
+        .topbar {
+            height: 72px;
+            flex-shrink: 0;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        .back {
+            width: 40px;
+            height: 40px;
+            display: grid;
+            place-items: center;
+            border: 1px solid #e8e8e8;
+            border-radius: 50%;
+            background: white;
+            transition: .25s ease;
+        }
+
+        .back svg {
+            width: 22px;
+            height: 22px;
+            fill: none;
+            stroke: #333;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .back:hover {
+            background: var(--pink-light);
+            border-color: var(--pink);
+            transform: translateX(-3px);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .icon-button {
+            width: 39px;
+            height: 39px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #e5e5e5;
+            border-radius: 50%;
+            background: white;
+            transition: .25s ease;
+        }
+
+        .icon-button img {
+            width: 22px;
+            height: 22px;
+            object-fit: contain;
+        }
+
+        .icon-button:hover {
+            background: var(--pink-light);
+            border-color: var(--pink);
+            transform: translateY(-3px);
+        }
+
+        /* CONTEÚDO */
+
+        .content {
+            flex: 1;
+            min-height: 0;
+            overflow-y: auto;
+            padding: 0 0 100px;
+            scrollbar-width: none;
+        }
+
+        .content::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* TÍTULO */
+
+        .page-heading {
+            padding: 27px 22px 22px;
+            text-align: center;
+        }
+
+        .page-heading small {
+            display: block;
+            color: var(--pink-dark);
+            font-size: 9px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .page-heading h1 {
+            font-size: 25px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .page-heading p {
+            font-size: 11px;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        /* RESUMO */
+
+        .summary {
+            margin: 0 18px 22px;
+            padding: 17px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(135deg, #f9e3e4, #fff4f4);
+            border: 1px solid #f5e1e1;
+            border-radius: 10px;
+        }
+
+        .summary-info small {
+            display: block;
+            color: #956467;
+            font-size: 10px;
+            margin-bottom: 5px;
+        }
+
+        .summary-info strong {
+            display: block;
+            font-size: 18px;
+        }
+
+        .summary-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: var(--pink);
+        }
+
+        /* SEÇÃO DE PEDIDOS */
+
+        .orders-section {
+            padding: 0 18px;
+        }
+
+        .section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 13px;
+        }
+
+        .section-heading h2 {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .section-heading span {
+            font-size: 10px;
+            color: var(--muted);
+        }
+
+        /* ABAS */
+
+        .tabs {
+            height: 45px;
+            padding: 4px;
+            display: flex;
+            gap: 5px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            margin-bottom: 19px;
+        }
+
+        .tab {
+            flex: 1;
+            border: none;
+            border-radius: 6px;
+            background: transparent;
+            color: #777;
+            font-size: 11px;
+            font-weight: 500;
+            transition: .25s ease;
+        }
+
+        .tab:hover {
+            color: var(--pink-dark);
+        }
+
+        .tab.active {
+            background: white;
+            color: var(--pink-dark);
+            font-weight: bold;
+            box-shadow: 0 2px 6px rgba(0,0,0,.07);
+        }
+
+        /* LISTA DE PEDIDOS */
+
+        .orders {
+            display: flex;
+            flex-direction: column;
+            gap: 13px;
+        }
+
+        /* CARD */
+
+        .order-card {
+            position: relative;
+            width: 100%;
+            min-height: 116px;
+            padding: 11px;
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            background: white;
+            border: 1px solid #eeeeee;
+            border-radius: 9px;
+            transition: transform .25s ease, box-shadow .25s ease;
+        }
+
+        .order-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,.07);
+        }
+
+        /* IMAGEM */
+
+        .order-image {
+            width: 88px;
+            height: 92px;
+            min-width: 88px;
+            border-radius: 7px;
+            overflow: hidden;
+            background: var(--pink-light);
+        }
+
+        .order-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* INFORMAÇÕES */
+
+        .order-details {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .order-details h3 {
+            font-size: 13px;
+            font-weight: bold;
+            overflow-wrap: anywhere;
+        }
+
+        .order-details p {
+            color: #777;
+            font-size: 10px;
+        }
+
+        .order-price {
+            margin-top: 3px;
+            color: var(--pink-dark);
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .order-label {
+            display: inline-block;
+            width: fit-content;
+            padding: 4px 7px;
+            background: var(--pink-light);
+            color: var(--pink-dark);
+            border-radius: 3px;
+            font-size: 8px;
+            font-weight: bold;
+        }
+
+        /* CANCELAR */
+
+        .cancel-order {
+            position: absolute;
+            top: 9px;
+            right: 9px;
+            width: 25px;
+            height: 25px;
+            border: 1px solid #f1dada;
+            border-radius: 50%;
+            background: #fff5f5;
+            color: #d66b70;
+            font-size: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: .2s ease;
+        }
+
+        .cancel-order:hover {
+            background: #ed777b;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        /* LISTA VAZIA */
+
+        .empty-orders {
+            padding: 35px 20px;
+            text-align: center;
+            background: #fffafa;
+            border: 1px dashed #edcaca;
+            border-radius: 10px;
+        }
+
+        .empty-icon {
+            width: 65px;
+            height: 65px;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--pink-light);
+            color: var(--pink);
+            font-size: 29px;
+        }
+
+        .empty-orders h3 {
+            font-size: 15px;
+            margin-bottom: 8px;
+        }
+
+        .empty-orders p {
+            max-width: 250px;
+            margin: 0 auto;
+            color: #888;
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        .empty-orders button {
+            margin-top: 17px;
+            padding: 10px 17px;
+            border: none;
+            border-radius: 4px;
+            background: var(--pink);
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+            transition: .2s ease;
+        }
+
+        .empty-orders button:hover {
+            background: var(--pink-dark);
+            transform: translateY(-2px);
+        }
+
+        /* RODAPÉ DA SEÇÃO */
+
+        .orders-footer {
+            margin-top: 22px;
+            padding: 14px;
+            text-align: center;
+            background: #fff4f4;
+            border-radius: 8px;
+        }
+
+        .orders-footer p {
+            font-size: 10px;
+            color: #956467;
+            line-height: 1.5;
+        }
+
+        /* BOTÃO FLUTUANTE */
+
+        .add-button {
+            position: fixed;
+            z-index: 5;
+            bottom: 66px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 42px;
+            height: 42px;
+            border: 3px solid white;
+            border-radius: 50%;
+            background: #222;
+            color: white;
+            font-size: 29px;
+            font-weight: 300;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,.2);
+            transition: transform .25s ease, background .25s ease;
+        }
+
+        .add-button:hover {
+            transform: translateX(-50%) scale(1.12);
+            background: var(--pink);
+        }
+
+        /* NAVEGAÇÃO INFERIOR */
+
+        .bottom-nav {
+            position: fixed;
+            z-index: 4;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 900px;
+            height: 76px;
+            padding: 8px 4px 5px;
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            align-items: center;
+            background: white;
+            border: 1px solid #eeeeee;
+            border-radius: 24px 24px 0 0;
+            box-shadow: 0 -4px 15px rgba(0,0,0,.05);
+        }
+
+        .nav-item {
+            height: 55px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 4px;
+            color: #555;
+            font-size: 9px;
+            transition: transform .2s ease, color .2s ease;
+        }
+
+        .nav-item img {
+            width: 25px;
+            height: 25px;
+            object-fit: contain;
+        }
+
+        .nav-item:hover {
+            transform: translateY(-3px);
+            color: var(--pink);
+        }
+
+        .nav-item.active {
+            color: var(--pink);
+            font-weight: bold;
+        }
+
+        /* COMPUTADORES */
+
+        @media (min-width: 700px) {
+            body {
+                padding: 20px 0;
+            }
+
+            .phone {
+                border-radius: 12px;
+            }
+
+            .page-heading {
+                padding-top: 35px;
+            }
+
+            .summary {
+                max-width: 650px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .orders-section {
+                width: 100%;
+                max-width: 700px;
+                margin: 0 auto;
+            }
+
+            .order-card {
+                min-height: 125px;
+            }
+
+            .order-image {
+                width: 100px;
+                height: 100px;
+                min-width: 100px;
+            }
+        }
+
+        /* CELULARES */
+
+        @media (max-width: 500px) {
+            body {
+                background: white;
+            }
+
+            .phone {
+                max-width: none;
+                height: 100dvh;
+                min-height: 0;
+                border-radius: 0;
+            }
+        }
+
+        @media (max-width: 350px) {
+            .order-card {
+                gap: 9px;
+                padding: 8px;
+            }
+
+            .order-image {
+                width: 72px;
+                height: 80px;
+                min-width: 72px;
+            }
+
+            .order-details h3 {
+                font-size: 11px;
+            }
+
+            .order-details p {
+                font-size: 9px;
+            }
+        }
+
+        /* ACESSIBILIDADE */
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                scroll-behavior: auto !important;
+                transition-duration: .01ms !important;
+            }
+        }
+
+    </style>
 </head>
 
 <body>
 
-    <!-- Mensagem para computadores -->
-    <aside class="desktop-message">
-        <div>
-            <h1>Closet</h1>
+    <main class="phone">
 
-            <p>
-                Esta interface foi criada para a versão mobile.
-                Reduza a largura da janela ou abra o site em um
-                celular para visualizar as telas do aplicativo.
-            </p>
+        <!-- FAIXA PROMOCIONAL -->
+
+        <div class="promo-bar">
+            ✨ CLOSET DA MARI • SEU ESTILO, SUA ESSÊNCIA ✨
         </div>
-    </aside>
 
-    <!-- Aplicativo mobile -->
-    <main class="mobile-app">
+        <!-- CABEÇALHO -->
 
-        <div class="phone-content">
+        <header class="topbar">
 
-            <!-- Cabeçalho -->
-            <header class="topbar">
-                <span class="spacer"></span>
+            <button class="back"
+                aria-label="Voltar"
+                onclick="history.back()">
 
-                <button class="icon-button" aria-label="Sacola">
-                    <img src="images/bag.png">
+                <svg viewBox="0 0 32 32">
+                    <path d="M19 5 8 16l11 11M9 16h21"/>
+                </svg>
+
+            </button>
+
+            <div class="header-actions">
+
+                <button class="icon-button"
+                    aria-label="Sacola"
+                    onclick="window.location.href='pedidos.html'">
+
+                    <img src="images/bag.png" alt="">
+
                 </button>
 
-                <button class="icon-button" aria-label="Notificações">
-                    <img src="images/bell.png">
+                <button class="icon-button"
+                    aria-label="Notificações">
+
+                    <img src="images/bell.png" alt="">
+
                 </button>
-            </header>
 
-            <!-- Título -->
-            <h1 class="page-title">Seus Pedidos!</h1>
+            </div>
 
-            <!-- Abas de pedidos -->
-            <nav class="tabs" aria-label="Filtrar pedidos">
+        </header>
 
-                <a class="selected" href="pedidos.html">
-                    Recentes
-                </a>
+        <!-- CONTEÚDO -->
 
-                <a href="sem-pedidos.html">
-                    Todos
-                </a>
+        <section class="content">
 
-            </nav>
+            <!-- TÍTULO -->
 
-            <!-- Lista de pedidos -->
-            <section class="item-list" aria-label="Lista de pedidos">
+            <div class="page-heading">
 
-                <div class="placeholder"></div>
+                <small>CLOSET DA MARI</small>
 
-                <div class="placeholder"></div>
+                <h1>Seus Pedidos!</h1>
 
-                <div class="placeholder"></div>
+                <p>
+                    Acompanhe os produtos que você escolheu.
+                    Tudo organizado em um só lugar.
+                </p>
 
-                <div class="placeholder"></div>
+            </div>
 
-                <div class="placeholder"></div>
+            <!-- RESUMO -->
+
+            <div class="summary">
+
+                <div class="summary-info">
+                    <small>SEUS PEDIDOS</small>
+                    <strong id="totalOrders">0 pedidos</strong>
+                </div>
+
+                <div class="summary-icon">
+                    ♡
+                </div>
+
+            </div>
+
+            <!-- SEÇÃO DE PEDIDOS -->
+
+            <section class="orders-section">
+
+                <div class="section-heading">
+
+                    <h2>Minha lista</h2>
+
+                    <span id="ordersCount">0 itens</span>
+
+                </div>
+
+                <!-- ABAS -->
+
+                <div class="tabs">
+
+                    <button class="tab active"
+                        aria-pressed="true"
+                        onclick="changeTab(this, 'recentes')">
+
+                        Recentes
+
+                    </button>
+
+                    <button class="tab"
+                        aria-pressed="false"
+                        onclick="changeTab(this, 'todos')">
+
+                        Todos
+
+                    </button>
+
+                </div>
+
+                <!-- PEDIDOS -->
+
+                <div class="orders" id="orders">
+
+                </div>
+
+                <!-- MENSAGEM FINAL -->
+
+                <div class="orders-footer">
+
+                    <p>
+                        ♡ Obrigada por escolher o CLOSET da Mari!
+                        Esperamos que você ame suas escolhas.
+                    </p>
+
+                </div>
 
             </section>
 
-            <!-- Navegação inferior -->
-            <nav class="bottom-nav" aria-label="Navegação principal">
+        </section>
 
-                <a class="active" href="index.html">
-                    <img src="images/home.png">
-                    <small>HOME</small>
-                </a>
+        <!-- BOTÃO FLUTUANTE -->
 
-                <a href="favoritos.html">
-                    <span class="nav-icon">♡</span>
-                    <small>FAVORITOS</small>
-                </a>
+        <button class="add-button"
+            aria-label="Escolher produtos"
+            onclick="window.location.href='index.html'">
 
-                <a href="pedidos.html">
-                    <img src="images/package.png">
-                    <small>PEDIDOS</small>
-                </a>
+            +
 
-                <a href="perfil.html">
-                    <img src="images/user.png">
-                    <small>PERFIL</small>
-                </a>
+        </button>
 
-            </nav>
+        <!-- NAVEGAÇÃO INFERIOR -->
 
-            <!-- Botão flutuante -->
-            <button
-                class="add-button"
-                aria-label="Adicionar aos favoritos"
-                onclick="window.location.href='favoritos.html'"
-            >
-                +
-            </button>
+        <nav class="bottom-nav">
 
-        </div>
+            <a href="./index.html" class="nav-item">
+
+                <img src="images/home.png" alt="">
+
+                <span>HOME</span>
+
+            </a>
+
+            <a href="./favoritos.html" class="nav-item">
+
+                <img src="images/heart.png" alt="">
+
+                <span>FAVORITOS</span>
+
+            </a>
+
+            <a href="./pedidos.html" class="nav-item active">
+
+                <img src="images/package.png" alt="">
+
+                <span>PEDIDOS</span>
+
+            </a>
+
+            <a href="./perfil.html" class="nav-item">
+
+                <img src="images/user.png" alt="">
+
+                <span>PERFIL</span>
+
+            </a>
+
+        </nav>
 
     </main>
+
+    <script>
+
+        // RECUPERAR PEDIDOS SALVOS
+
+        const ordersContainer = document.getElementById("orders");
+
+        let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
+
+        let abaAtual = "recentes";
+
+
+        // SALVAR PEDIDOS
+
+        function salvarPedidos() {
+
+            localStorage.setItem("pedidos", JSON.stringify(pedidos));
+
+        }
+
+
+        // ATUALIZAR CONTADORES
+
+        function atualizarContadores() {
+
+            const total = pedidos.length;
+
+            document.getElementById("totalOrders").textContent =
+                total + (total === 1 ? " pedido" : " pedidos");
+
+            document.getElementById("ordersCount").textContent =
+                total + (total === 1 ? " item" : " itens");
+
+        }
+
+
+        // MOSTRAR PEDIDOS
+
+        function mostrarPedidos() {
+
+            ordersContainer.innerHTML = "";
+
+            atualizarContadores();
+
+            let pedidosExibidos = [...pedidos].reverse();
+
+            // ABA RECENTES: MOSTRA OS ÚLTIMOS 5
+
+            if (abaAtual === "recentes") {
+
+                pedidosExibidos = pedidosExibidos.slice(0, 5);
+
+            }
+
+
+            // VERIFICAR SE EXISTEM PEDIDOS
+
+            if (pedidosExibidos.length === 0) {
+
+                const vazio = document.createElement("div");
+
+                vazio.className = "empty-orders";
+
+                vazio.innerHTML = `
+                    <div class="empty-icon">♡</div>
+
+                    <h3>
+                        ${pedidos.length === 0
+                            ? "Você ainda não possui pedidos."
+                            : "Nenhum pedido recente."}
+                    </h3>
+
+                    <p>
+                        ${pedidos.length === 0
+                            ? "Explore nossa coleção e encontre peças que combinam com seu estilo."
+                            : "Seus pedidos mais antigos estão disponíveis na aba Todos."}
+                    </p>
+
+                    ${pedidos.length === 0
+                        ? '<button onclick="window.location.href=\'index.html\'">EXPLORAR PRODUTOS</button>'
+                        : ""}
+                `;
+
+                ordersContainer.appendChild(vazio);
+
+                return;
+
+            }
+
+
+            // CRIAR OS CARDS
+
+            pedidosExibidos.forEach(pedido => {
+
+                const card = document.createElement("article");
+
+                card.className = "order-card";
+
+
+                // IMAGEM
+
+                const imagemContainer = document.createElement("div");
+
+                imagemContainer.className = "order-image";
+
+                const imagem = document.createElement("img");
+
+                imagem.src = pedido.imagem || "";
+
+                imagem.alt = pedido.nome || "Produto";
+
+                imagem.onerror = function() {
+
+                    this.style.display = "none";
+
+                };
+
+                imagemContainer.appendChild(imagem);
+
+
+                // DETALHES
+
+                const detalhes = document.createElement("div");
+
+                detalhes.className = "order-details";
+
+
+                const nome = document.createElement("h3");
+
+                nome.textContent = pedido.nome || "Produto";
+
+
+                const tamanho = document.createElement("p");
+
+                tamanho.textContent =
+                    "Tamanho: " + (pedido.tamanho || "Não informado");
+
+
+                const data = document.createElement("p");
+
+                data.textContent =
+                    "Pedido: " + (pedido.data || "Não informada");
+
+
+                const preco = document.createElement("span");
+
+                preco.className = "order-price";
+
+                preco.textContent = pedido.preco || "Preço não informado";
+
+
+                const etiqueta = document.createElement("span");
+
+                etiqueta.className = "order-label";
+
+                etiqueta.textContent = "PEDIDO REGISTRADO";
+
+
+                detalhes.append(
+                    etiqueta,
+                    nome,
+                    tamanho,
+                    data,
+                    preco
+                );
+
+
+                // BOTÃO CANCELAR
+
+                const cancelar = document.createElement("button");
+
+                cancelar.className = "cancel-order";
+
+                cancelar.textContent = "×";
+
+                cancelar.setAttribute(
+                    "aria-label",
+                    "Cancelar pedido"
+                );
+
+
+                cancelar.addEventListener("click", () => {
+
+                    const confirmar = confirm(
+                        "Deseja realmente remover este pedido da sua lista?"
+                    );
+
+                    if (confirmar) {
+
+                        const indice = pedidos.indexOf(pedido);
+
+                        if (indice !== -1) {
+
+                            pedidos.splice(indice, 1);
+
+                        }
+
+                        salvarPedidos();
+
+                        mostrarPedidos();
+
+                    }
+
+                });
+
+
+                // MONTAR CARD
+
+                card.append(
+                    imagemContainer,
+                    detalhes,
+                    cancelar
+                );
+
+                ordersContainer.appendChild(card);
+
+            });
+
+        }
+
+
+        // ALTERNAR ABAS
+
+        function changeTab(selectedTab, aba) {
+
+            document.querySelectorAll(".tab").forEach(tab => {
+
+                tab.classList.remove("active");
+
+                tab.setAttribute("aria-pressed", "false");
+
+            });
+
+            selectedTab.classList.add("active");
+
+            selectedTab.setAttribute("aria-pressed", "true");
+
+            abaAtual = aba;
+
+            mostrarPedidos();
+
+        }
+
+
+        // CARREGAR PEDIDOS AO ABRIR A PÁGINA
+
+        mostrarPedidos();
+
+    </script>
 
 </body>
 </html>
